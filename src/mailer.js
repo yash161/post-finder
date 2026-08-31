@@ -15,6 +15,7 @@
 import 'dotenv/config';
 import nodemailer from 'nodemailer';
 import { loadPreviousResults } from './results.js';
+import { filterByRecency } from './dateParser.js';
 
 // ── Config ───────────────────────────────────────────────────
 
@@ -25,6 +26,10 @@ const DASHBOARD_URL = process.env.DASHBOARD_URL || 'https://post-finder-neon.ver
 
 const FORCE = process.argv.includes('--force');
 const DRY_RUN = process.argv.includes('--dry-run');
+const MAX_HOURS = parseInt(
+  process.argv.find((a, i) => process.argv[i - 1] === '--hours') || '24',
+  10
+);
 
 // ── Category metadata ────────────────────────────────────────
 
@@ -227,15 +232,21 @@ async function main() {
   // Load results
   const data = loadPreviousResults();
   const allResults = data.results || [];
-  const newPosts = allResults.filter((r) => r.isNew);
   const runNumber = data.runs || 0;
 
-  console.log(`  Total posts: ${allResults.length}`);
-  console.log(`  New posts:   ${newPosts.length}`);
-  console.log(`  Run #:       ${runNumber}`);
+  // Filter to only new posts within the time window
+  const newPosts = filterByRecency(
+    allResults.filter((r) => r.isNew),
+    MAX_HOURS
+  );
+
+  console.log(`  Total posts:    ${allResults.length}`);
+  console.log(`  New (all time): ${allResults.filter(r => r.isNew).length}`);
+  console.log(`  New (past ${MAX_HOURS}h): ${newPosts.length}`);
+  console.log(`  Run #:          ${runNumber}`);
 
   if (newPosts.length === 0 && !FORCE) {
-    console.log('\n  ✅ No new posts — skipping email.');
+    console.log('\n  ✅ No new posts within time window — skipping email.');
     return;
   }
 

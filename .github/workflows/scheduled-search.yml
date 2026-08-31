@@ -62,7 +62,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
           DASHBOARD_URL: ${{ vars.DASHBOARD_URL || 'https://post-finder.vercel.app' }}
-        run: node src/mailer.js
+        run: node src/mailer.js --hours 24
 
       - name: Copy results for Vercel dashboard
         run: |
