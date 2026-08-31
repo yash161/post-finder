@@ -64,3 +64,45 @@ export function matchesLocation(result, locationPhrase) {
   const haystack = `${result.title || ''} ${result.snippet || ''}`.toLowerCase();
   return haystack.includes(locationPhrase);
 }
+
+/**
+ * Extract the parenthesized OR-groups from a query (hiring-phrase and/or
+ * skill-term groups — everything except the trailing location phrase,
+ * which isn't parenthesized).
+ *
+ * e.g. `hiring ("automation engineer" OR "software test engineer") "los angeles"`
+ *   → [["automation engineer", "software test engineer"]]
+ *
+ * @param {string} query - A built query string (from buildQueryString)
+ * @returns {string[][]} Array of OR-term groups (each lowercase, unquoted)
+ */
+export function extractRequiredGroups(query) {
+  const body = query.replace(/^site:linkedin\.com\/posts\s+/, '');
+  const groups = [];
+  const groupRegex = /\(([^)]+)\)/g;
+  let match;
+  while ((match = groupRegex.exec(body))) {
+    const terms = match[1]
+      .split(/\s+OR\s+/i)
+      .map((t) => t.trim().replace(/^"|"$/g, '').toLowerCase())
+      .filter(Boolean);
+    if (terms.length > 0) groups.push(terms);
+  }
+  return groups;
+}
+
+/**
+ * Check whether a result's title/snippet contains at least one term from
+ * every required OR-group. Tinyfish can return results that share only
+ * the hiring phrase and location with a query while ignoring the actual
+ * skill/role terms entirely — this catches those.
+ *
+ * @param {Object} result - A raw Tinyfish result with title/snippet
+ * @param {string[][]} groups - From extractRequiredGroups()
+ * @returns {boolean} True if there are no groups to check, or every group has a match
+ */
+export function matchesRequiredGroups(result, groups) {
+  if (!groups || groups.length === 0) return true;
+  const haystack = `${result.title || ''} ${result.snippet || ''}`.toLowerCase();
+  return groups.every((terms) => terms.some((t) => haystack.includes(t)));
+}

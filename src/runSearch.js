@@ -6,7 +6,13 @@
  */
 
 import { categories as allCategories } from './config.js';
-import { buildCategoryQueries, extractLocationPhrase, matchesLocation } from './queryBuilder.js';
+import {
+  buildCategoryQueries,
+  extractLocationPhrase,
+  matchesLocation,
+  extractRequiredGroups,
+  matchesRequiredGroups,
+} from './queryBuilder.js';
 import { searchBatch } from './tinyfish.js';
 import { deduplicateResults, markNewResults, extractAuthor, normalizeUrl } from './dedup.js';
 import { filterByRecency, parseRelativeDate } from './dateParser.js';
@@ -33,8 +39,10 @@ export async function runSearch({ categories = allCategories, maxHours = 24 } = 
     for (const batch of batchResults) {
       if (batch.error) continue;
       const locationPhrase = extractLocationPhrase(batch.query);
+      const requiredGroups = extractRequiredGroups(batch.query);
       for (const result of batch.results) {
         if (!matchesLocation(result, locationPhrase)) continue;
+        if (!matchesRequiredGroups(result, requiredGroups)) continue;
         const parsed = parseRelativeDate(result.date);
         flatResults.push({
           ...result,

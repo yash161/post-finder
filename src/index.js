@@ -18,7 +18,13 @@
 import 'dotenv/config';
 import { program } from 'commander';
 import { categories } from './config.js';
-import { buildCategoryQueries, extractLocationPhrase, matchesLocation } from './queryBuilder.js';
+import {
+  buildCategoryQueries,
+  extractLocationPhrase,
+  matchesLocation,
+  extractRequiredGroups,
+  matchesRequiredGroups,
+} from './queryBuilder.js';
 import { searchBatch } from './tinyfish.js';
 import { deduplicateResults, markNewResults, extractAuthor, normalizeUrl } from './dedup.js';
 import { filterByRecency, parseRelativeDate } from './dateParser.js';
@@ -115,6 +121,7 @@ async function main() {
     const flatResults = [];
     let failedQueries = 0;
     let offLocationCount = 0;
+    let offTopicCount = 0;
     for (const batch of batchResults) {
       if (batch.error) {
         failedQueries++;
@@ -123,13 +130,18 @@ async function main() {
         }
         continue;
       }
-      // Tinyfish doesn't strictly enforce quoted phrases, so it can return
-      // results that only loosely match (e.g. wrong country) — verify the
-      // location this query targeted actually appears in the result.
+      // Tinyfish doesn't strictly enforce quoted phrases or boolean groups,
+      // so it can return results that only loosely match (e.g. wrong
+      // country, or none of the required skill terms) — verify both.
       const locationPhrase = extractLocationPhrase(batch.query);
+      const requiredGroups = extractRequiredGroups(batch.query);
       for (const result of batch.results) {
         if (!matchesLocation(result, locationPhrase)) {
           offLocationCount++;
+          continue;
+        }
+        if (!matchesRequiredGroups(result, requiredGroups)) {
+          offTopicCount++;
           continue;
         }
         // Parse the relative date string into a timestamp for filtering
@@ -154,6 +166,10 @@ async function main() {
 
     if (!opts.json && offLocationCount > 0) {
       console.log(`    📍 Filtered out ${offLocationCount} posts that didn't actually mention the target location`);
+    }
+
+    if (!opts.json && offTopicCount > 0) {
+      console.log(`    🎯 Filtered out ${offTopicCount} posts that didn't mention any required skill/role term`);
     }
 
     if (!opts.json && flatResults.length > 0 && recentResults.length < flatResults.length) {
