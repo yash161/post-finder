@@ -243,7 +243,8 @@ async function main() {
     console.log('\n  ⚠️  No new posts but --force flag set, sending anyway.');
   }
 
-  const subject = `🔍 Post Finder: ${newPosts.length} new hiring posts found (${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`;
+  const dateLabel = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const subject = `Post Finder: ${newPosts.length} new hiring posts - ${dateLabel}`;
   const html = buildEmailHtml(newPosts, allResults.length, runNumber);
   const text = buildEmailText(newPosts, allResults.length, runNumber);
 
@@ -255,21 +256,34 @@ async function main() {
     return;
   }
 
-  // Create transporter (same pattern as portfolio app)
+  // Create transporter — use SMTP directly for better deliverability
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
-      user: GMAIL_USER,
+      user: GMAIL_USER.includes('@') ? GMAIL_USER : `${GMAIL_USER}@gmail.com`,
       pass: GMAIL_PASS,
     },
   });
 
+  const senderEmail = GMAIL_USER.includes('@') ? GMAIL_USER : `${GMAIL_USER}@gmail.com`;
+
   const mailOptions = {
-    from: `"Post Finder" <${GMAIL_USER}@gmail.com>`,
+    // "from" must match the authenticated Gmail account to avoid spam
+    from: `"Yash - Post Finder" <${senderEmail}>`,
     to: RECIPIENT,
+    replyTo: RECIPIENT,
     subject,
     text,
     html,
+    headers: {
+      // Signals this is a wanted, non-bulk personal notification
+      'X-Priority': '3',
+      'X-Mailer': 'Post Finder Automation',
+      'Precedence': 'bulk',
+      'List-Unsubscribe': `<mailto:${senderEmail}?subject=unsubscribe>`,
+    },
   };
 
   try {
