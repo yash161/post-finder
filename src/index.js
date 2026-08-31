@@ -106,6 +106,7 @@ async function main() {
     }
 
     const batchResults = await searchBatch(queries, {
+      recencyMinutes: maxHours * 60,
       onProgress: !opts.json
         ? (done, total) => {
             queryCount++;

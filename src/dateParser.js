@@ -55,19 +55,24 @@ export function parseRelativeDate(dateStr) {
 /**
  * Check if a result's date falls within the given hours window.
  *
- * @param {Object} result - A result object with a `date` field
+ * Tinyfish omits the `date` field entirely when a search is scoped with
+ * `recency_minutes` (see src/tinyfish.js) — in that case we fall back to
+ * `foundAt`, our own timestamp of when the result was fetched, rather than
+ * excluding it outright. That's accurate at fetch time (the server already
+ * enforced the window) and still a reasonable signal later, e.g. when
+ * mailer.js re-filters already-stored results for a digest.
+ *
+ * @param {Object} result - A result object with a `date` and/or `foundAt` field
  * @param {number} maxHours - Maximum age in hours (e.g. 24, 48)
- * @returns {boolean} True if the post is within the window, or if date is unknown
+ * @returns {boolean} True if the post is within the window, or if age is unknown
  */
 export function isWithinHours(result, maxHours) {
-  if (!result.date) {
-    // No date info — we can't determine age, exclude it to be safe
-    return false;
-  }
+  const parsedDate = (result.date && parseRelativeDate(result.date))
+    || (result.foundAt && new Date(result.foundAt))
+    || null;
 
-  const parsedDate = parseRelativeDate(result.date);
   if (!parsedDate) {
-    // Unparseable date string — exclude
+    // No date info at all — we can't determine age, exclude it to be safe
     return false;
   }
 

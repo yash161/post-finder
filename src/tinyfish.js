@@ -45,14 +45,20 @@ function isRetryable(status) {
  * @param {Object} options
  * @param {string} options.location - Geo filter (default: 'US')
  * @param {string} options.language - Language filter (default: 'en')
+ * @param {number} options.recencyMinutes - Freshness window in minutes (e.g. 1440 for 24h).
+ *   Without this, Tinyfish ranks by relevance across its whole index and can return
+ *   results that are months or years old even when genuinely fresh matches exist.
  * @param {function} options.onRetry - Called when retrying: (retryNum, waitMs)
  * @returns {Promise<Object>} { query, results: [...], totalResults }
  */
-export async function search(query, { location = 'US', language = 'en', onRetry = null } = {}) {
+export async function search(query, { location = 'US', language = 'en', recencyMinutes = null, onRetry = null } = {}) {
   const url = new URL(API_BASE);
   url.searchParams.set('query', query);
   url.searchParams.set('location', location);
   url.searchParams.set('language', language);
+  if (recencyMinutes) {
+    url.searchParams.set('recency_minutes', String(recencyMinutes));
+  }
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     const response = await fetch(url.toString(), {
@@ -96,6 +102,7 @@ export async function search(query, { location = 'US', language = 'en', onRetry 
  * @param {number} options.delayMs - Milliseconds between API calls (default: 2100 for 30/min limit)
  * @param {string} options.location
  * @param {string} options.language
+ * @param {number} options.recencyMinutes - Freshness window in minutes, forwarded to search()
  * @param {function} options.onProgress - Called after each query with (completedCount, totalCount, query)
  * @param {function} options.onRetry - Called on rate-limit retry with (retryNum, waitMs, query)
  * @returns {Promise<Object[]>} Array of { query, results, totalResults }
@@ -104,6 +111,7 @@ export async function searchBatch(queries, {
   delayMs = DEFAULT_DELAY_MS,
   location = 'US',
   language = 'en',
+  recencyMinutes = null,
   onProgress = null,
   onRetry = null,
 } = {}) {
@@ -114,6 +122,7 @@ export async function searchBatch(queries, {
       const result = await search(queries[i], {
         location,
         language,
+        recencyMinutes,
         onRetry: onRetry
           ? (retryNum, waitMs) => onRetry(retryNum, waitMs, queries[i])
           : null,

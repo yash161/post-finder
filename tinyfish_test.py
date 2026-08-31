@@ -6,7 +6,7 @@ with open(".env") as f:
         if line.startswith("TINYFISH_API_KEY="):
             api_key = line.split("=", 1)[1].strip()
 
-query = 'site:linkedin.com/posts hiring ("AI engineer" OR "machine learning engineer") "united states"'
+query = 'go to https://www.linkedin.com/jobs and apply past 24 hours filets and then type ai engineer and tell me what are u geeting '
 url = "https://api.search.tinyfish.ai?" + urllib.parse.urlencode({"query": query, "location": "US", "language": "en"})
 
 req = urllib.request.Request(url, headers={

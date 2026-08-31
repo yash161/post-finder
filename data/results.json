@@ -363,8 +363,34 @@
       "foundAt": "2026-08-31T08:46:33.306Z",
       "parsedDate": "2026-08-24T08:46:33.306Z",
       "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... hiring practices and insult the broken systems they use to filter us out ... Agentic AI, Principal Machine Learning Engineer. Zillow, United States. 1 2 ...",
+      "title": "James Hood ❤️🌈🌟's Post",
+      "url": "https://www.linkedin.com/posts/jameshood118_boycottzillow-workday-workdaysucks-activity-7499927119074947072-z94c",
+      "categoryId": 11,
+      "categoryName": "AI Engineer / MLOps / Perception",
+      "author": "jameshood118",
+      "foundAt": "2026-08-31T08:57:28.226Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 3,
+      "site_name": "www.linkedin.com",
+      "snippet": "The United States and the United Kingdom are reflections, same size and shape. ... AI Engineer, Architect & Enterprise Agility Coach | I ship the ...",
+      "title": "#facts #data #bias | Xerxes Wennerstierna | 89 comments",
+      "url": "https://www.linkedin.com/posts/wennerstierna_facts-data-bias-activity-7499849707205091328-_ama",
+      "categoryId": 11,
+      "categoryName": "AI Engineer / MLOps / Perception",
+      "author": "wennerstierna",
+      "foundAt": "2026-08-31T08:57:28.234Z",
+      "parsedDate": null,
+      "isNew": true
     }
   ],
-  "lastRun": "2026-08-31T08:46:33.308Z",
-  "runs": 5
+  "lastRun": "2026-08-31T08:57:28.235Z",
+  "runs": 6
 }
