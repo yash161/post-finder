@@ -36,7 +36,7 @@ jobs:
       - name: Run Tinyfish search (all categories)
         env:
           TINYFISH_API_KEY: ${{ secrets.TINYFISH_API_KEY }}
-        run: node src/index.js --json > /tmp/run_output.json 2>&1 || true
+        run: node src/index.js --hours 24 --json > /tmp/run_output.json 2>&1 || true
 
       - name: Process results
         run: |

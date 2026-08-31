@@ -7,9 +7,9 @@
  * the Tinyfish Search API, deduplicates, persists, and displays results.
  *
  * Usage:
- *   node src/index.js                        # Run all 14 categories
+ *   node src/index.js                        # Run all 14 categories (past 24h)
+ *   node src/index.js --hours 48             # Past 48 hours
  *   node src/index.js --categories 1,2,9     # Run specific categories
- *   node src/index.js --past-week            # Expand to past week (low-volume)
  *   node src/index.js --dashboard            # Also start the web dashboard
  *   node src/index.js --json                 # Output raw JSON to stdout
  *   node src/index.js --dashboard-only       # Only start the dashboard (no new search)
@@ -21,6 +21,7 @@ import { categories } from './config.js';
 import { buildCategoryQueries } from './queryBuilder.js';
 import { searchBatch } from './tinyfish.js';
 import { deduplicateResults, markNewResults, extractAuthor, normalizeUrl } from './dedup.js';
+import { filterByRecency, parseRelativeDate } from './dateParser.js';
 import { loadPreviousResults, saveResults } from './results.js';
 import {
   printHeader,
@@ -39,7 +40,7 @@ program
   .description('Automated LinkedIn hiring post discovery via Tinyfish Search API')
   .version('1.0.0')
   .option('-c, --categories <ids>', 'Comma-separated category IDs to run (default: all)', '')
-  .option('--past-week', 'Search past week instead of past 24h (for low-volume categories)')
+  .option('-h, --hours <hours>', 'Max post age in hours (default: 24)', '24')
   .option('--dashboard', 'Start the web dashboard after searching')
   .option('--dashboard-only', 'Start the web dashboard without running a new search')
   .option('--json', 'Output raw JSON to stdout instead of formatted text')
@@ -72,8 +73,10 @@ async function main() {
     }
   }
 
+  const maxHours = parseInt(opts.hours, 10) || 24;
+
   if (!opts.json) {
-    console.log(`  Running ${selectedCategories.length} categories…\n`);
+    console.log(`  Running ${selectedCategories.length} categories (past ${maxHours}h)…\n`);
   }
 
   // Load previous results for comparison
@@ -120,6 +123,8 @@ async function main() {
         continue;
       }
       for (const result of batch.results) {
+        // Parse the relative date string into a timestamp for filtering
+        const parsed = parseRelativeDate(result.date);
         flatResults.push({
           ...result,
           categoryId: category.id,
@@ -127,12 +132,21 @@ async function main() {
           author: extractAuthor(result.url),
           url: normalizeUrl(result.url),
           foundAt: new Date().toISOString(),
+          parsedDate: parsed ? parsed.toISOString() : null,
         });
       }
     }
 
+    // Filter by recency
+    const recentResults = filterByRecency(flatResults, maxHours);
+
     // Deduplicate within this category
-    const dedupedResults = deduplicateResults(flatResults);
+    const dedupedResults = deduplicateResults(recentResults);
+
+    if (!opts.json && flatResults.length > 0 && recentResults.length < flatResults.length) {
+      const filtered = flatResults.length - recentResults.length;
+      console.log(`    📅 Filtered out ${filtered} posts older than ${maxHours}h`);
+    }
 
     allCategoryResults.push({
       category,
