@@ -1,31 +1,21 @@
 /**
- * Shared "run a fresh search across categories" routine, used by both
- * the local dashboard server (src/dashboard.js) and the Vercel
- * /api/run serverless function (api/run.js) that powers the
- * dashboard's "Run Now" button.
+ * Shared "run a fresh search" routine, used by both
+ * the local dashboard server and the CLI.
  */
 
 import { categories as allCategories } from './config.js';
-import {
-  buildCategoryQueries,
-  extractLocationPhrase,
-  matchesLocation,
-  extractRequiredGroups,
-  matchesRequiredGroups,
-} from './queryBuilder.js';
+import { buildCategoryQueries } from './queryBuilder.js';
 import { searchBatch } from './tinyfish.js';
 import { deduplicateResults, markNewResults, extractAuthor, normalizeUrl } from './dedup.js';
 import { filterByRecency, parseRelativeDate } from './dateParser.js';
 
 /**
- * Run searches for the given categories, filter by recency, and dedupe
- * globally across categories. Does not persist anything — callers decide
- * how/where to save (local fs vs. a GitHub commit).
+ * Run searches for the given categories, filter by recency, and dedupe.
  *
  * @param {Object} options
- * @param {Object[]} [options.categories] - Category objects to search (default: all from config.js)
+ * @param {Object[]} [options.categories] - Categories to search (default: all)
  * @param {number} [options.maxHours] - Recency window in hours (default: 24)
- * @returns {Promise<Object[]>} Globally deduplicated results across all categories
+ * @returns {Promise<Object[]>} Deduplicated results
  */
 export async function runSearch({ categories = allCategories, maxHours = 24 } = {}) {
   const allResults = [];
@@ -38,11 +28,7 @@ export async function runSearch({ categories = allCategories, maxHours = 24 } = 
     const flatResults = [];
     for (const batch of batchResults) {
       if (batch.error) continue;
-      const locationPhrase = extractLocationPhrase(batch.query);
-      const requiredGroups = extractRequiredGroups(batch.query);
       for (const result of batch.results) {
-        if (!matchesLocation(result, locationPhrase)) continue;
-        if (!matchesRequiredGroups(result, requiredGroups)) continue;
         const parsed = parseRelativeDate(result.date);
         flatResults.push({
           ...result,
