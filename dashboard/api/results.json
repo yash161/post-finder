@@ -27,8 +27,78 @@
       "foundAt": "2026-08-31T07:48:25.609Z",
       "parsedDate": "2026-08-30T12:48:25.609Z",
       "isNew": true
+    },
+    {
+      "date": "2 days ago",
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "WE ARE HIRING 1) Founding Product Manager Remote United States Base 2)Senior Cloud / DevOps / SRE Cloud & Corporate Infrastructure Remote ...",
+      "title": "Dr Elvis Mengnjo Basang's Post",
+      "url": "https://www.linkedin.com/posts/dr-elvis-mengnjo-basang_we-are-hiring-1-founding-product-manager-activity-7499057844458008577--caR",
+      "categoryId": 2,
+      "categoryName": "SRE / Infrastructure",
+      "author": "dr-elvis-mengnjo-basang",
+      "foundAt": "2026-08-31T08:01:31.695Z",
+      "parsedDate": "2026-08-29T08:01:31.695Z",
+      "isNew": true
+    },
+    {
+      "date": "2 days ago",
+      "position": 9,
+      "site_name": "www.linkedin.com",
+      "snippet": "Docker, Inc is hiring folks to help solve for this problem. I'm #hiring ... Docker, Inc, United States. 38 2 Comments · Like Comment. Share. Copy",
+      "title": "Emily Mucken - hiring",
+      "url": "https://www.linkedin.com/posts/emucken_hiring-activity-7499171690065813504-wD0B",
+      "categoryId": 3,
+      "categoryName": "Kubernetes / Containers",
+      "author": "emucken",
+      "foundAt": "2026-08-31T08:01:40.784Z",
+      "parsedDate": "2026-08-29T08:01:40.784Z",
+      "isNew": true
+    },
+    {
+      "date": "2 days ago",
+      "position": 7,
+      "site_name": "www.linkedin.com",
+      "snippet": "... AI infrastructure is heading, with the people building it. Our hiring managers will be in the room. September 2 | Los Angeles Apply here ...",
+      "title": "Fluidstack's Post",
+      "url": "https://www.linkedin.com/posts/fluidstack_steel-silicon-is-coming-to-los-angeles-activity-7499214504317292544-ufNQ",
+      "categoryId": 9,
+      "categoryName": "AI Infrastructure / Agentic AI / MLOps",
+      "author": "fluidstack",
+      "foundAt": "2026-08-31T08:02:32.074Z",
+      "parsedDate": "2026-08-29T08:02:32.074Z",
+      "isNew": true
+    },
+    {
+      "date": "2 days ago",
+      "position": 8,
+      "site_name": "www.linkedin.com",
+      "snippet": "I am hiring! If you have Snowflake or strong adjacent skills, come apply ... Technical Architect. Snowflake, Washington, United States · 61 · Like ...",
+      "title": "Chuck Lathrope's Post - Snowflake",
+      "url": "https://www.linkedin.com/posts/chucklathrope_i-am-hiring-if-you-have-snowflake-or-strong-activity-7499290912896786432-YI06",
+      "categoryId": 14,
+      "categoryName": "Data Engineering / ETL",
+      "author": "chucklathrope",
+      "foundAt": "2026-08-31T08:03:47.780Z",
+      "parsedDate": "2026-08-29T08:03:47.780Z",
+      "isNew": true
+    },
+    {
+      "date": "2 days ago",
+      "position": 9,
+      "site_name": "www.linkedin.com",
+      "snippet": "... Hiring #AISecurity #Cybersecurity #ArtificialIntelligence ... Vice President, AI Technology & Security Engineer. Oaktree, Los Angeles, CA.",
+      "title": "Murtuza Kagalwala's Post",
+      "url": "https://www.linkedin.com/posts/murtuzak_hiring-aisecurity-cybersecurity-activity-7499088878809632768-xHng",
+      "categoryId": 19,
+      "categoryName": "Security Engineering / DevSecOps",
+      "author": "murtuzak",
+      "foundAt": "2026-08-31T08:04:20.991Z",
+      "parsedDate": "2026-08-29T08:04:20.991Z",
+      "isNew": true
     }
   ],
-  "lastRun": "2026-08-31T07:50:03.463Z",
-  "runs": 2
+  "lastRun": "2026-08-31T08:04:30.309Z",
+  "runs": 3
 }
