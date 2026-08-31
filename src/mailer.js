@@ -21,7 +21,7 @@ import { loadPreviousResults } from './results.js';
 const GMAIL_USER = process.env.GMAIL_USER || 'testwowtruecaller123';
 const GMAIL_PASS = process.env.GMAIL_APP_PASSWORD || 'vpjbpiivyzziwgkd';
 const RECIPIENT = process.env.EMAIL_RECIPIENT || 'yashshah3698@gmail.com';
-const DASHBOARD_URL = process.env.DASHBOARD_URL || 'https://post-finder.vercel.app';
+const DASHBOARD_URL = process.env.DASHBOARD_URL || 'https://post-finder-neon.vercel.app';
 
 const FORCE = process.argv.includes('--force');
 const DRY_RUN = process.argv.includes('--dry-run');
