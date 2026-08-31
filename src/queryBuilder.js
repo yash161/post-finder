@@ -25,3 +25,42 @@ export function buildQueryString(query) {
 export function buildCategoryQueries(category) {
   return category.queries.map((q) => buildQueryString(q));
 }
+
+/**
+ * Known location phrases used across config.js queries, in the exact
+ * quoted form they appear in (e.g. `"los angeles"`).
+ */
+const LOCATION_PHRASES = ['united states', 'san francisco', 'los angeles'];
+
+/**
+ * Extract the quoted location phrase a query was built with, if any.
+ *
+ * Tinyfish doesn't strictly enforce quoted phrases the way LinkedIn's own
+ * search does — it can return loosely-related results (wrong country,
+ * wrong city) that merely share other keywords like "hiring". This lets
+ * callers verify a result actually mentions the location it matched on.
+ *
+ * @param {string} query - A built query string (from buildQueryString)
+ * @returns {string|null} The location phrase (lowercase, unquoted), or null
+ */
+export function extractLocationPhrase(query) {
+  const lower = query.toLowerCase();
+  for (const loc of LOCATION_PHRASES) {
+    if (lower.includes(`"${loc}"`)) return loc;
+  }
+  return null;
+}
+
+/**
+ * Check whether a result's title/snippet actually contains the location
+ * phrase its query targeted (case-insensitive substring match).
+ *
+ * @param {Object} result - A raw Tinyfish result with title/snippet
+ * @param {string|null} locationPhrase - From extractLocationPhrase()
+ * @returns {boolean} True if there's no location phrase to check, or it's present
+ */
+export function matchesLocation(result, locationPhrase) {
+  if (!locationPhrase) return true;
+  const haystack = `${result.title || ''} ${result.snippet || ''}`.toLowerCase();
+  return haystack.includes(locationPhrase);
+}

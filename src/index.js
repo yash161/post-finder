@@ -18,7 +18,7 @@
 import 'dotenv/config';
 import { program } from 'commander';
 import { categories } from './config.js';
-import { buildCategoryQueries } from './queryBuilder.js';
+import { buildCategoryQueries, extractLocationPhrase, matchesLocation } from './queryBuilder.js';
 import { searchBatch } from './tinyfish.js';
 import { deduplicateResults, markNewResults, extractAuthor, normalizeUrl } from './dedup.js';
 import { filterByRecency, parseRelativeDate } from './dateParser.js';
@@ -114,6 +114,7 @@ async function main() {
     // Flatten all results from this category's queries
     const flatResults = [];
     let failedQueries = 0;
+    let offLocationCount = 0;
     for (const batch of batchResults) {
       if (batch.error) {
         failedQueries++;
@@ -122,7 +123,15 @@ async function main() {
         }
         continue;
       }
+      // Tinyfish doesn't strictly enforce quoted phrases, so it can return
+      // results that only loosely match (e.g. wrong country) — verify the
+      // location this query targeted actually appears in the result.
+      const locationPhrase = extractLocationPhrase(batch.query);
       for (const result of batch.results) {
+        if (!matchesLocation(result, locationPhrase)) {
+          offLocationCount++;
+          continue;
+        }
         // Parse the relative date string into a timestamp for filtering
         const parsed = parseRelativeDate(result.date);
         flatResults.push({
@@ -142,6 +151,10 @@ async function main() {
 
     // Deduplicate within this category
     const dedupedResults = deduplicateResults(recentResults);
+
+    if (!opts.json && offLocationCount > 0) {
+      console.log(`    📍 Filtered out ${offLocationCount} posts that didn't actually mention the target location`);
+    }
 
     if (!opts.json && flatResults.length > 0 && recentResults.length < flatResults.length) {
       const filtered = flatResults.length - recentResults.length;
