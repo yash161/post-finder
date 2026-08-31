@@ -818,8 +818,99 @@
       "foundAt": "2026-08-31T21:32:00.074Z",
       "parsedDate": null,
       "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... AI infrastructure. Our founders and hiring managers will be in the room. September 2 | Los Angeles Apply here: https://luma.com/sfy1kfp5. No alternative text ...",
+      "title": "Mike M.'s Post",
+      "url": "https://www.linkedin.com/posts/asciimike_when-i-wrote-about-ships-and-shipyards-i-activity-7500278867232866304-TVYn",
+      "categoryId": 9,
+      "categoryName": "AI Infrastructure / Agentic AI / MLOps",
+      "author": "asciimike",
+      "foundAt": "2026-08-31T23:09:49.283Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "AI Engineer ⚡ Caught in a LinkedIn hiring post — before it hits the job boards. United States USD 132600-179400/year Client seeks a Senior AI Engineer ...",
+      "title": "Freelanly's Post",
+      "url": "https://www.linkedin.com/posts/professional-community-of-freelance-translators-and-interpreters_ai-engineer-caught-in-a-linkedin-hiring-activity-7500085166208552960-TmLo",
+      "categoryId": 11,
+      "categoryName": "AI Engineer / MLOps / Perception",
+      "author": "professional-community-of-freelance-translators-and-interpreters",
+      "foundAt": "2026-08-31T23:10:35.637Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 7,
+      "site_name": "www.linkedin.com",
+      "snippet": "... United States - even with insurance The comparison won't be true in every ... Software Engineer Mundus sine Caesaribus Slava Ukraini. 12h. Report this ...",
+      "title": "Daniel Baum's Post",
+      "url": "https://www.linkedin.com/posts/danielbaumjapan_its-very-sad-but-very-very-true-well-put-activity-7500075490515300352-Gw-m",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "danielbaumjapan",
+      "foundAt": "2026-08-31T23:11:17.844Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're #hiring a new Founding Software Engineer in San Francisco Bay Area. Apply today or share this post with your network.",
+      "title": "Code Compass - hiring",
+      "url": "https://www.linkedin.com/posts/code-compass_hiring-activity-7500155874712182784-Cd0d",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "code-compass",
+      "foundAt": "2026-08-31T23:11:17.844Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 2,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're helping over 100 startups hire software engineers - connect w/ startups ... Senior Software Engineer - $200K - $400K. Fonzi AI, San Francisco Bay Area.",
+      "title": "Fonzi AI - startups backed by A16z, Sequoia, YC and more",
+      "url": "https://www.linkedin.com/posts/fonziai_were-helping-over-100-startups-hire-software-activity-7500155976793128962-iyrC",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "fonziai",
+      "foundAt": "2026-08-31T23:11:17.844Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 5,
+      "site_name": "www.linkedin.com",
+      "snippet": "HIRING: Industrial Engineers. HIRING: Industrial Engineers. United States | Fully remote, own schedule • Compensation: $70–$110 per hour • Contract: ...",
+      "title": "Tamer Omar, MBA, PMP's Post",
+      "url": "https://www.linkedin.com/posts/taomar_industrialengineering-engineeringjobs-activity-7500262395597021186-di7P",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "taomar",
+      "foundAt": "2026-08-31T23:11:17.844Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 9,
+      "site_name": "www.linkedin.com",
+      "snippet": "... engineering content and workflows. Role details • United States | Fully remote, own schedule • Compensation: $70–$110 per hour • Contract ...",
+      "title": "Tamer Omar, MBA, PMP's Post",
+      "url": "https://www.linkedin.com/posts/taomar_mechanicalengineering-engineeringjobs-activity-7500254846151753728-4Eka",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "taomar",
+      "foundAt": "2026-08-31T23:11:17.844Z",
+      "parsedDate": null,
+      "isNew": true
     }
   ],
-  "lastRun": "2026-08-31T21:32:00.077Z",
-  "runs": 7
+  "lastRun": "2026-08-31T23:13:38.999Z",
+  "runs": 8
 }
