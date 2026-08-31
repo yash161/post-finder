@@ -1,9 +1,16 @@
 /**
  * Vercel serverless function — runs a fresh Tinyfish search on demand
  * (triggered by the "Run Now" button on the dashboard) and commits the
- * merged results back to GitHub via the Contents API, so data/results.json
- * and dashboard/api/results.json stay in sync with what the scheduled
- * GitHub Action produces.
+ * merged results back to GitHub via the Contents API.
+ *
+ * Only data/results.json is written here — it's the single source of
+ * truth (same file the scheduled GitHub Action writes to). The commit
+ * triggers a Vercel redeploy, whose existing buildCommand (see
+ * vercel.json) copies it into dashboard/api/results.json, so we don't
+ * duplicate that write and risk the two files diverging if one commit
+ * succeeds and the other doesn't. The response also returns the fresh
+ * data directly, so the dashboard updates immediately without waiting
+ * on the redeploy.
  *
  * POST /api/run
  * Body: { hours?: number }
@@ -69,10 +76,7 @@ export default async function handler(req, res) {
   const maxHours = Number.isFinite(+body.hours) && +body.hours > 0 ? +body.hours : 24;
 
   try {
-    const [dataFile, dashboardFile] = await Promise.all([
-      getFile('data/results.json'),
-      getFile('dashboard/api/results.json'),
-    ]);
+    const dataFile = await getFile('data/results.json');
     const previousData = dataFile.json;
 
     const allResults = await runSearch({ maxHours });
@@ -94,10 +98,7 @@ export default async function handler(req, res) {
     };
 
     const commitMessage = `🔍 Manual run via dashboard — ${new Date().toISOString()} [skip ci]`;
-    await Promise.all([
-      putFile('data/results.json', newData, dataFile.sha, commitMessage),
-      putFile('dashboard/api/results.json', newData, dashboardFile.sha, commitMessage),
-    ]);
+    await putFile('data/results.json', newData, dataFile.sha, commitMessage);
 
     res.status(200).json({
       ok: true,
