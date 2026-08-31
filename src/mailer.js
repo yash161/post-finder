@@ -47,7 +47,14 @@ const CATEGORIES = {
   11: 'AI Engineer / MLOps / Perception',
   12: 'HIL / Software Test Automation',
   13: 'General Software Engineering',
-  14: 'Extras — Cross-category',
+  14: 'Data Engineering / ETL',
+  15: 'Web Scraping / Data Extraction',
+  16: 'Linux / RHEL System Administration',
+  17: 'NoSQL / Graph Databases',
+  18: 'GCP (Google Cloud)',
+  19: 'Security Engineering / DevSecOps',
+  20: 'IoT / Embedded Systems',
+  21: 'Internal Tooling / ChatOps / Integration',
 };
 
 const TIER_COLORS = {
