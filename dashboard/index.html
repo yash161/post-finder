@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post Finder — LinkedIn Hiring Dashboard</title>
+  <meta name="description" content="Automated LinkedIn hiring post discovery dashboard powered by Tinyfish Search API" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: rgba(22, 22, 35, 0.7);
+      --bg-card-hover: rgba(30, 30, 48, 0.85);
+      --border: rgba(100, 100, 180, 0.12);
+      --border-hover: rgba(108, 99, 255, 0.35);
+      --text-primary: #e8e8f0;
+      --text-secondary: #9090aa;
+      --text-muted: #606078;
+      --accent-purple: #6C63FF;
+      --accent-cyan: #00D2FF;
+      --accent-coral: #FF6B6B;
+      --accent-green: #4ADE80;
+      --accent-yellow: #FBBF24;
+      --glass-bg: rgba(22, 22, 40, 0.6);
+      --glass-border: rgba(100, 100, 180, 0.15);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-glow-purple: 0 0 20px rgba(108, 99, 255, 0.15);
+      --shadow-glow-cyan: 0 0 20px rgba(0, 210, 255, 0.15);
+      --shadow-glow-coral: 0 0 20px rgba(255, 107, 107, 0.15);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Animated background ── */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 20%, rgba(108, 99, 255, 0.08), transparent),
+        radial-gradient(ellipse 500px 300px at 80% 60%, rgba(0, 210, 255, 0.06), transparent),
+        radial-gradient(ellipse 400px 400px at 50% 90%, rgba(255, 107, 107, 0.05), transparent);
+      animation: bgShift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgShift {
+      0%   { opacity: 0.8; }
+      50%  { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    /* ── Header ── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(10, 10, 15, 0.75);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 16px 24px;
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .run-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .run-info .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--glass-bg);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+      background: rgba(108, 99, 255, 0.1);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, rgba(108, 99, 255, 0.2), rgba(0, 210, 255, 0.15));
+      border-color: var(--accent-purple);
+      color: var(--text-primary);
+    }
+
+    .search-input {
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      width: 200px;
+      outline: none;
+      transition: all var(--transition);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-purple);
+      box-shadow: var(--shadow-glow-purple);
+    }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      max-width: 1400px;
+      margin: 20px auto 0;
+      padding: 0 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      flex: 1;
+      min-width: 140px;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .stat-card .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-purple .stat-value { color: var(--accent-purple); }
+    .stat-cyan .stat-value { color: var(--accent-cyan); }
+    .stat-green .stat-value { color: var(--accent-green); }
+    .stat-coral .stat-value { color: var(--accent-coral); }
+
+    /* ── Category Sections ── */
+    .content {
+      max-width: 1400px;
+      margin: 24px auto;
+      padding: 0 24px 60px;
+    }
+
+    .category-section {
+      margin-bottom: 32px;
+      animation: fadeIn 0.5s ease-out both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .category-badge.tier-core { background: linear-gradient(135deg, #6C63FF, #8B7FFF); }
+    .category-badge.tier-cloud { background: linear-gradient(135deg, #00B4D8, #00D2FF); }
+    .category-badge.tier-specialty { background: linear-gradient(135deg, #FF6B6B, #FF8A8A); }
+
+    .category-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .category-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: auto;
+      font-weight: 500;
+    }
+
+    .category-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ── Result Cards ── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 12px;
+    }
+
+    .result-card {
+      position: relative;
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      transition: all var(--transition);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .result-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .result-card:hover::before {
+      opacity: 1;
+    }
+
+    .result-card.is-new {
+      border-left: 3px solid var(--accent-green);
+    }
+
+    .result-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .new-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(74, 222, 128, 0.12);
+      color: var(--accent-green);
+      border: 1px solid rgba(74, 222, 128, 0.25);
+      flex-shrink: 0;
+    }
+
+    .result-date {
+      font-size: 11px;
+      color: var(--accent-yellow);
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .result-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .result-snippet {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .result-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .result-author {
+      font-size: 12px;
+      color: var(--accent-purple);
+      font-weight: 500;
+    }
+
+    .result-author::before {
+      content: '👤 ';
+    }
+
+    .result-site {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border-radius: 16px;
+      border: 1px solid var(--accent-purple);
+      background: rgba(108, 99, 255, 0.1);
+      color: var(--accent-purple);
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .open-btn:hover {
+      background: var(--accent-purple);
+      color: white;
+      box-shadow: var(--shadow-glow-purple);
+    }
+
+    /* ── Empty State ── */
+    .empty-state {
+      padding: 40px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .empty-state .empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    /* ── Category filter pills ── */
+    .category-filters {
+      max-width: 1400px;
+      margin: 16px auto 0;
+      padding: 0 24px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .cat-pill {
+      padding: 4px 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .cat-pill:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+
+    .cat-pill.active {
+      background: rgba(108, 99, 255, 0.15);
+      border-color: var(--accent-purple);
+      color: var(--accent-purple);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .controls {
+        width: 100%;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-bar {
+        flex-direction: column;
+      }
+
+      .stat-card {
+        min-width: unset;
+      }
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(108, 99, 255, 0.3);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(108, 99, 255, 0.5);
+    }
+
+    /* ── Loading skeleton ── */
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-card) 25%, rgba(40, 40, 60, 0.7) 50%, var(--bg-card) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s ease-in-out infinite;
+      border-radius: var(--radius);
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-card {
+      height: 160px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <div class="logo">🔍 Post Finder</div>
+        <div class="run-info">
+          <div class="dot"></div>
+          <span id="lastRunInfo">Loading…</span>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="filter-btn active" data-filter="all" id="filterAll">All</button>
+        <button class="filter-btn" data-filter="new" id="filterNew">🆕 New Only</button>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search posts…" />
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-card stat-purple">
+      <div class="stat-value" id="statTotal">—</div>
+      <div class="stat-label">Total Posts</div>
+    </div>
+    <div class="stat-card stat-green">
+      <div class="stat-value" id="statNew">—</div>
+      <div class="stat-label">New This Run</div>
+    </div>
+    <div class="stat-card stat-cyan">
+      <div class="stat-value" id="statCategories">—</div>
+      <div class="stat-label">Categories</div>
+    </div>
+    <div class="stat-card stat-coral">
+      <div class="stat-value" id="statRuns">—</div>
+      <div class="stat-label">Total Runs</div>
+    </div>
+  </div>
+
+  <!-- Category filter pills -->
+  <div class="category-filters" id="categoryFilters"></div>
+
+  <!-- Content -->
+  <main class="content" id="content">
+    <div class="empty-state">
+      <div class="empty-icon">⏳</div>
+      <p>Loading results…</p>
+    </div>
+  </main>
+
+  <script>
+    // ── State ──
+    let allResults = [];
+    let metadata = {};
+    let activeFilter = 'all';
+    let activeCategoryId = null;
+    let searchQuery = '';
+
+    // ── Category metadata ──
+    const CATEGORIES = {
+      1:  { name: 'Cloud Automation / DevOps / Platform', tier: 'core' },
+      2:  { name: 'SRE / Infrastructure', tier: 'core' },
+      3:  { name: 'Kubernetes / Containers', tier: 'core' },
+      4:  { name: 'Terraform / Ansible / IaC', tier: 'core' },
+      5:  { name: 'AWS', tier: 'cloud' },
+      6:  { name: 'Azure', tier: 'cloud' },
+      7:  { name: 'CockroachDB / Database Migration / CDC', tier: 'cloud' },
+      8:  { name: 'CI/CD Tooling', tier: 'cloud' },
+      9:  { name: 'AI Infrastructure / Agentic AI / MLOps-as-tooling', tier: 'specialty' },
+      10: { name: 'Full-Stack Engineer', tier: 'specialty' },
+      11: { name: 'AI Engineer / MLOps / Perception', tier: 'specialty' },
+      12: { name: 'HIL / Software Test Automation', tier: 'specialty' },
+      13: { name: 'General Software Engineering', tier: 'specialty' },
+      14: { name: 'Extras — Cross-category', tier: 'specialty' },
+    };
+
+    // ── Fetch data ──
+    async function fetchResults() {
+      try {
+        const resp = await fetch('/api/results');
+        const data = await resp.json();
+        allResults = data.results || [];
+        metadata = {
+          lastRun: data.lastRun,
+          runs: data.runs || 0,
+        };
+        render();
+      } catch (err) {
+        document.getElementById('content').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">❌</div>
+            <p>Failed to load results. Run a search first:<br><code>node src/index.js</code></p>
+          </div>
+        `;
+      }
+    }
+
+    // ── Extract author from URL ──
+    function extractAuthor(url) {
+      const match = url.match(/linkedin\.com\/posts\/([^_/]+)/);
+      return match ? match[1] : null;
+    }
+
+    // ── Render ──
+    function render() {
+      // Stats
+      const newCount = allResults.filter(r => r.isNew).length;
+      const catIds = new Set(allResults.map(r => r.categoryId).filter(Boolean));
+
+      document.getElementById('statTotal').textContent = allResults.length;
+      document.getElementById('statNew').textContent = newCount;
+      document.getElementById('statCategories').textContent = catIds.size;
+      document.getElementById('statRuns').textContent = metadata.runs;
+
+      if (metadata.lastRun) {
+        const ago = timeAgo(new Date(metadata.lastRun));
+        document.getElementById('lastRunInfo').textContent = `Last run: ${ago}`;
+      }
+
+      // Category filter pills
+      renderCategoryPills(catIds);
+
+      // Filter results
+      let filtered = [...allResults];
+
+      if (activeFilter === 'new') {
+        filtered = filtered.filter(r => r.isNew);
+      }
+
+      if (activeCategoryId !== null) {
+        filtered = filtered.filter(r => r.categoryId === activeCategoryId);
+      }
+
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(r =>
+          (r.title || '').toLowerCase().includes(q) ||
+          (r.snippet || '').toLowerCase().includes(q) ||
+          (r.url || '').toLowerCase().includes(q) ||
+          (r.categoryName || '').toLowerCase().includes(q)
+        );
+      }
+
+      // Group by category
+      const grouped = {};
+      for (const r of filtered) {
+        const catId = r.categoryId || 0;
+        if (!grouped[catId]) grouped[catId] = [];
+        grouped[catId].push(r);
+      }
+
+      // Render
+      const content = document.getElementById('content');
+
+      if (filtered.length === 0) {
+        content.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            <p>${allResults.length === 0 ? 'No results yet. Run a search:<br><code>node src/index.js</code>' : 'No posts match your current filters.'}</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      const sortedCatIds = Object.keys(grouped).map(Number).sort((a, b) => a - b);
+
+      for (const catId of sortedCatIds) {
+        const cat = CATEGORIES[catId] || { name: `Category ${catId}`, tier: 'specialty' };
+        const results = grouped[catId];
+        const newInCat = results.filter(r => r.isNew).length;
+        const delay = sortedCatIds.indexOf(catId) * 0.08;
+
+        html += `
+          <section class="category-section" style="animation-delay: ${delay}s">
+            <div class="category-header">
+              <span class="category-badge tier-${cat.tier}">${catId}</span>
+              <span class="category-title">${cat.name}</span>
+              <span class="category-count">${results.length} posts${newInCat > 0 ? ` · ${newInCat} new` : ''}</span>
+            </div>
+            <div class="results-grid">
+        `;
+
+        for (const r of results) {
+          const author = r.author || extractAuthor(r.url);
+          html += `
+            <div class="result-card${r.isNew ? ' is-new' : ''}" onclick="window.open('${escHtml(r.url)}', '_blank')">
+              <div class="result-top">
+                ${r.isNew ? '<span class="new-badge">New</span>' : ''}
+                ${r.date ? `<span class="result-date">${escHtml(r.date)}</span>` : ''}
+              </div>
+              <div class="result-title">${escHtml(r.title || 'Untitled')}</div>
+              ${r.snippet ? `<div class="result-snippet">${escHtml(r.snippet)}</div>` : ''}
+              <div class="result-footer">
+                ${author ? `<span class="result-author">${escHtml(author)}</span>` : '<span></span>'}
+                <a href="${escHtml(r.url)}" target="_blank" rel="noopener" class="open-btn" onclick="event.stopPropagation()">
+                  Open ↗
+                </a>
+              </div>
+            </div>
+          `;
+        }
+
+        html += `
+            </div>
+          </section>
+        `;
+      }
+
+      content.innerHTML = html;
+    }
+
+    // ── Category pills ──
+    function renderCategoryPills(catIds) {
+      const container = document.getElementById('categoryFilters');
+      let html = `<button class="cat-pill${activeCategoryId === null ? ' active' : ''}" data-cat="all">All</button>`;
+
+      const sorted = [...catIds].sort((a, b) => a - b);
+      for (const id of sorted) {
+        const cat = CATEGORIES[id];
+        if (!cat) continue;
+        // Shorten names for pills
+        const shortName = cat.name.split('/')[0].trim();
+        html += `<button class="cat-pill${activeCategoryId === id ? ' active' : ''}" data-cat="${id}">${id}. ${shortName}</button>`;
+      }
+
+      container.innerHTML = html;
+
+      // Event listeners
+      container.querySelectorAll('.cat-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.dataset.cat;
+          activeCategoryId = val === 'all' ? null : parseInt(val);
+          render();
+        });
+      });
+    }
+
+    // ── Event listeners ──
+    document.getElementById('filterAll').addEventListener('click', () => {
+      activeFilter = 'all';
+      document.getElementById('filterAll').classList.add('active');
+      document.getElementById('filterNew').classList.remove('active');
+      render();
+    });
+
+    document.getElementById('filterNew').addEventListener('click', () => {
+      activeFilter = 'new';
+      document.getElementById('filterNew').classList.add('active');
+      document.getElementById('filterAll').classList.remove('active');
+      render();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      render();
+    });
+
+    // ── Helpers ──
+    function escHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function timeAgo(date) {
+      const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+      if (seconds < 60) return 'just now';
+      const minutes = Math.floor(seconds / 60);
+      if (minutes < 60) return `${minutes}m ago`;
+      const hours = Math.floor(minutes / 60);
+      if (hours < 24) return `${hours}h ago`;
+      const days = Math.floor(hours / 24);
+      return `${days}d ago`;
+    }
+
+    // ── Init ──
+    fetchResults();
+
+    // Auto-refresh every 30 seconds
+    setInterval(fetchResults, 30000);
+  </script>
+</body>
+</html>

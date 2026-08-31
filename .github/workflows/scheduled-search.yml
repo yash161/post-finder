@@ -1,0 +1,85 @@
+name: Scheduled LinkedIn Post Search
+
+on:
+  schedule:
+    # 9am PST = 4pm UTC (PST is UTC-8, but during PDT it's UTC-7)
+    # Using UTC-7 (PDT) since most of the year California observes PDT
+    - cron: '0 16 * * *'   # 9:00 AM PST/PDT
+    - cron: '0 19 * * *'   # 12:00 PM PST/PDT
+    - cron: '0 0 * * *'    # 5:00 PM PST/PDT (midnight UTC next day)
+  workflow_dispatch:        # Allow manual trigger
+
+permissions:
+  contents: write           # Needed to commit results back to repo
+
+jobs:
+  search-and-notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create data directory
+        run: mkdir -p data dashboard/api
+
+      - name: Run Tinyfish search (all categories)
+        env:
+          TINYFISH_API_KEY: ${{ secrets.TINYFISH_API_KEY }}
+        run: node src/index.js --json > /tmp/run_output.json 2>&1 || true
+
+      - name: Process results
+        run: |
+          # Check if the search produced valid output
+          if [ -f data/results.json ]; then
+            echo "✅ Search completed successfully"
+            
+            # Count results
+            TOTAL=$(node -e "const d=JSON.parse(require('fs').readFileSync('data/results.json','utf8')); console.log(d.results?.length || 0)")
+            NEW=$(node -e "const d=JSON.parse(require('fs').readFileSync('data/results.json','utf8')); console.log(d.results?.filter(r=>r.isNew).length || 0)")
+            echo "📊 Total: $TOTAL, New: $NEW"
+            echo "NEW_COUNT=$NEW" >> $GITHUB_ENV
+          else
+            echo "⚠️ No results file found"
+            echo "NEW_COUNT=0" >> $GITHUB_ENV
+          fi
+
+      - name: Send email notification
+        if: env.NEW_COUNT != '0'
+        env:
+          TINYFISH_API_KEY: ${{ secrets.TINYFISH_API_KEY }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
+          DASHBOARD_URL: ${{ vars.DASHBOARD_URL || 'https://post-finder.vercel.app' }}
+        run: node src/mailer.js
+
+      - name: Copy results for Vercel dashboard
+        run: |
+          cp data/results.json dashboard/api/results.json 2>/dev/null || echo '{"results":[],"lastRun":null,"runs":0}' > dashboard/api/results.json
+
+      - name: Commit and push updated results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add data/results.json dashboard/api/results.json
+          
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
+            git commit -m "🔍 Search results updated — $TIMESTAMP [skip ci]"
+            git push
+          fi
