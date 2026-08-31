@@ -20,8 +20,7 @@ const RETRY_RATE_LIMIT_MS = 30_000; // Wait 30s on first 429, doubling each retr
 const RETRY_SERVER_ERROR_MS = 5_000; // Wait 5s on first 5xx, doubling each retry
 
 if (!API_KEY) {
-  console.error('❌  TINYFISH_API_KEY is not set. Create a .env file with your key.');
-  process.exit(1);
+  throw new Error('TINYFISH_API_KEY is not set. Create a .env file with your key.');
 }
 
 /**

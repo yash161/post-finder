@@ -567,6 +567,71 @@
       background: var(--bg-secondary);
       color: var(--text-primary);
     }
+
+    /* ── Run Now button ── */
+    .run-now-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--accent-green);
+      background: rgba(74, 222, 128, 0.1);
+      color: var(--accent-green);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .run-now-btn:hover:not(:disabled) {
+      background: var(--accent-green);
+      color: #0a0a0f;
+      box-shadow: 0 0 20px rgba(74, 222, 128, 0.25);
+    }
+
+    .run-now-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .run-now-btn .spin {
+      display: inline-block;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .run-status {
+      max-width: 1400px;
+      margin: 10px auto 0;
+      padding: 0 24px;
+      font-size: 12px;
+    }
+
+    .run-status .banner {
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--glass-bg);
+      color: var(--text-secondary);
+    }
+
+    .run-status .banner.success {
+      border-color: rgba(74, 222, 128, 0.35);
+      color: var(--accent-green);
+      background: rgba(74, 222, 128, 0.08);
+    }
+
+    .run-status .banner.error {
+      border-color: rgba(255, 107, 107, 0.35);
+      color: var(--accent-coral);
+      background: rgba(255, 107, 107, 0.08);
+    }
   </style>
 </head>
 <body>
@@ -593,9 +658,12 @@
         <button class="filter-btn active" data-filter="all" id="filterAll">All</button>
         <button class="filter-btn" data-filter="new" id="filterNew">🆕 New Only</button>
         <input type="text" class="search-input" id="searchInput" placeholder="Search posts…" />
+        <button class="run-now-btn" id="runNowBtn">▶ Run Now</button>
       </div>
     </div>
   </header>
+
+  <div class="run-status" id="runStatus" hidden></div>
 
   <!-- Stats -->
   <div class="stats-bar" id="statsBar">
@@ -877,6 +945,47 @@
     document.getElementById('timeSelect').addEventListener('change', (e) => {
       activeTimeRange = parseInt(e.target.value, 10);
       render();
+    });
+
+    // ── Run Now ──
+    function showRunStatus(message, kind) {
+      const box = document.getElementById('runStatus');
+      box.hidden = false;
+      box.innerHTML = `<div class="banner${kind ? ' ' + kind : ''}">${escHtml(message)}</div>`;
+    }
+
+    document.getElementById('runNowBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('runNowBtn');
+      // "All Time" (0) isn't a valid search window — fall back to 24h for the actual fetch.
+      const hours = activeTimeRange > 0 ? activeTimeRange : 24;
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spin">⟳</span> Running…';
+      showRunStatus(`Running a fresh search across all 21 categories for the past ${hours}h. This can take up to ~4 minutes — please keep this tab open.`);
+
+      try {
+        const resp = await fetch('/api/run', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ hours }),
+        });
+        const payload = await resp.json();
+
+        if (!resp.ok || !payload.ok) {
+          throw new Error(payload.error || `Request failed (${resp.status})`);
+        }
+
+        allResults = payload.data.results || [];
+        metadata = { lastRun: payload.data.lastRun, runs: payload.data.runs || 0 };
+        render();
+
+        showRunStatus(`✅ Run complete — ${payload.newCount} new post${payload.newCount === 1 ? '' : 's'} found (${payload.totalCount} tracked total).`, 'success');
+      } catch (err) {
+        showRunStatus(`❌ Run failed: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '▶ Run Now';
+      }
     });
 
     // ── Helpers ──

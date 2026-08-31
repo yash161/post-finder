@@ -1,15 +1,24 @@
 {
   "buildCommand": "mkdir -p dashboard/api && cp data/results.json dashboard/api/results.json 2>/dev/null || echo '{\"results\":[],\"lastRun\":null,\"runs\":0}' > dashboard/api/results.json",
   "outputDirectory": "dashboard",
+  "functions": {
+    "api/run.js": { "maxDuration": 300 }
+  },
   "rewrites": [
     { "source": "/api/results", "destination": "/api/results.json" }
   ],
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/results",
       "headers": [
         { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" },
         { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
+    {
+      "source": "/api/run",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
       ]
     }
   ]

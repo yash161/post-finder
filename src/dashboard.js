@@ -10,7 +10,8 @@ import express from 'express';
 import { readFileSync, existsSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { getResultsFilePath } from './results.js';
+import { getResultsFilePath, loadPreviousResults, saveResults } from './results.js';
+import { runSearch, markNewResults } from './runSearch.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DASHBOARD_HTML = join(__dirname, '..', 'dashboard', 'index.html');
@@ -18,6 +19,7 @@ const PORT = 3000;
 
 export function startDashboard() {
   const app = express();
+  app.use(express.json());
 
   // Serve dashboard HTML
   app.get('/', (_req, res) => {
@@ -35,6 +37,24 @@ export function startDashboard() {
       res.json(data);
     } catch {
       res.status(500).json({ error: 'Failed to read results' });
+    }
+  });
+
+  // "Run Now" — runs a fresh search across all categories and saves to data/results.json
+  app.post('/api/run', async (req, res) => {
+    const hours = Number.isFinite(+req.body?.hours) && +req.body.hours > 0 ? +req.body.hours : 24;
+    console.log(`\n  ▶ Run Now triggered from dashboard (past ${hours}h)…`);
+    try {
+      const previousData = loadPreviousResults();
+      const allResults = await runSearch({ maxHours: hours });
+      const markedResults = markNewResults(allResults, previousData.results);
+      const savedData = saveResults(markedResults, previousData);
+      const newCount = markedResults.filter((r) => r.isNew).length;
+      console.log(`  ✅ Run complete — ${newCount} new, ${savedData.results.length} tracked total.\n`);
+      res.json({ ok: true, newCount, totalCount: savedData.results.length, data: savedData });
+    } catch (err) {
+      console.error(`  ❌ Run failed: ${err.message}\n`);
+      res.status(500).json({ error: err.message });
     }
   });
 
