@@ -2336,8 +2336,64 @@
       "foundAt": "2026-09-02T19:25:37.095Z",
       "parsedDate": "2026-09-01T22:25:37.095Z",
       "isNew": true
+    },
+    {
+      "date": "10 hours ago",
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... United States - Base pay runs $173000 to $218500, depending on state - It ... Senior Machine Learning Engineer, Operations Research. TalentHop, United ...",
+      "title": "Senior Machine Learning Engineer, Operations Research - LinkedIn",
+      "url": "https://www.linkedin.com/posts/arthirajendran_a-recruiter-called-talenthop-just-posted-activity-7500879368441716736-nUFS",
+      "categoryId": 11,
+      "categoryName": "AI Engineer / MLOps / Perception",
+      "author": "arthirajendran",
+      "foundAt": "2026-09-02T21:37:35.342Z",
+      "parsedDate": "2026-09-02T11:37:35.342Z",
+      "isNew": true
+    },
+    {
+      "date": "9 hours ago",
+      "position": 3,
+      "site_name": "www.linkedin.com",
+      "snippet": "Verint, United States · 18 2 Comments · Like Comment. Share. Copy; LinkedIn ... Software Engineer | Applied AI Engineer | MS AI @ USF | Agentic AI | FinTech | Ex ...",
+      "title": "Helen Vergel de Dios' Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/helenvergeldedios_remote-software-engineer-activity-7500892450845016065-o6BD",
+      "categoryId": 11,
+      "categoryName": "AI Engineer / MLOps / Perception",
+      "author": "helenvergeldedios",
+      "foundAt": "2026-09-02T21:37:35.342Z",
+      "parsedDate": "2026-09-02T12:37:35.342Z",
+      "isNew": true
+    },
+    {
+      "date": "21 hours ago",
+      "position": 6,
+      "site_name": "www.linkedin.com",
+      "snippet": "Netflix is hiring for broadcasting and live streaming operations engineers. Broadcast Operations Engineer | Los Angeles,California,United States of America. ...",
+      "title": "Broadcast Operations Engineer | Netflix | Reveting - LinkedIn",
+      "url": "https://www.linkedin.com/posts/whiskey-winsday_broadcast-operations-engineer-los-angeles-activity-7500711745540214784-WuNp",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "whiskey-winsday",
+      "foundAt": "2026-09-02T21:38:09.630Z",
+      "parsedDate": "2026-09-02T00:38:09.630Z",
+      "isNew": true
+    },
+    {
+      "date": "9 hours ago",
+      "position": 3,
+      "site_name": "www.linkedin.com",
+      "snippet": "Wishing you some remarkable conversations across the United States and the United Kingdom. ... Google Cloud · Microsoft · Oracle | ICF Certified | Adjunct ...",
+      "title": "Adam Grant's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/adammgrant_hope-to-see-you-this-fall-on-the-vibe-tour-activity-7500893935813435393-Geom",
+      "categoryId": 18,
+      "categoryName": "GCP (Google Cloud)",
+      "author": "adammgrant",
+      "foundAt": "2026-09-02T21:39:11.286Z",
+      "parsedDate": "2026-09-02T12:39:11.286Z",
+      "isNew": true
     }
   ],
-  "lastRun": "2026-09-02T19:25:37.097Z",
-  "runs": 12
+  "lastRun": "2026-09-02T21:39:38.994Z",
+  "runs": 13
 }
