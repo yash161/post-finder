@@ -2910,8 +2910,78 @@
       "foundAt": "2026-09-03T19:19:42.799Z",
       "parsedDate": "2026-09-03T15:19:42.799Z",
       "isNew": true
+    },
+    {
+      "date": "7 hours ago",
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... Next.js, and modern cloud infrastructure, with exposure to compilers, program analysis, or legacy systems as a plus. In person in San Francisco ... Ex-AWS Hiring ...",
+      "title": "Eric Spiegel's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/espiegel_undertheradartechinternships-internships-activity-7501281603151761408-Mrlo",
+      "categoryId": 10,
+      "categoryName": "Full-Stack Engineer",
+      "author": "espiegel",
+      "foundAt": "2026-09-03T21:35:53.421Z",
+      "parsedDate": "2026-09-03T14:35:53.421Z",
+      "isNew": true
+    },
+    {
+      "date": "6 hours ago",
+      "position": 8,
+      "site_name": "www.linkedin.com",
+      "snippet": "... United States PostgreSQL Association, for giving me the chance and ... Ezra Yendau's Post. View profile for Ezra Yendau · Ezra Yendau. Software Engineer ...",
+      "title": "Ezra Yendau's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/ezra-yendau-601ba3246_speaker-django-bpd-activity-7501308429035270144-jNjb",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "ezra-yendau-601ba3246",
+      "foundAt": "2026-09-03T21:36:49.815Z",
+      "parsedDate": "2026-09-03T15:36:49.815Z",
+      "isNew": true
+    },
+    {
+      "date": "6 hours ago",
+      "position": 7,
+      "site_name": "www.linkedin.com",
+      "snippet": "I wrapped up my summer software engineering internship at Manulife. er and went out to San Francisco to travel around the Bay Area. SWE @ Shopify |",
+      "title": "Sujoy Das' Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/sujoydas1_time-really-flies-when-youre-having-fun-activity-7501300735561609216-FZWX",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "sujoydas1",
+      "foundAt": "2026-09-03T21:36:49.815Z",
+      "parsedDate": "2026-09-03T15:36:49.815Z",
+      "isNew": true
+    },
+    {
+      "date": "10 hours ago",
+      "position": 8,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're #hiring a new SME Engineer - Packaging in United States. Apply today or share this post with your network. Major Recruitment, United States",
+      "title": "#hiring | Major Recruitment - LinkedIn",
+      "url": "https://www.linkedin.com/posts/major-recruitment_hiring-activity-7501242111963365378-vvJH",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "major-recruitment",
+      "foundAt": "2026-09-03T21:36:49.815Z",
+      "parsedDate": "2026-09-03T11:36:49.815Z",
+      "isNew": true
+    },
+    {
+      "date": "6 hours ago",
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "Such a great walk through, literally. Matt Palmer. Developer Experience at SpaceXAI ... San Francisco. Play Video. Video Player is loading. Loaded: 0%. Play Back ...",
+      "title": "Such a great walk through, literally. | Ryan Gridley - LinkedIn",
+      "url": "https://www.linkedin.com/posts/ryangridley_such-a-great-walk-through-literally-activity-7501308498119610368-Sr_p",
+      "categoryId": 21,
+      "categoryName": "Internal Tooling / ChatOps / Integration",
+      "author": "ryangridley",
+      "foundAt": "2026-09-03T21:38:19.269Z",
+      "parsedDate": "2026-09-03T15:38:19.269Z",
+      "isNew": true
     }
   ],
-  "lastRun": "2026-09-03T19:19:54.132Z",
-  "runs": 15
+  "lastRun": "2026-09-03T21:38:19.270Z",
+  "runs": 16
 }
