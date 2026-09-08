@@ -5173,8 +5173,78 @@
       "foundAt": "2026-09-07T21:57:55.516Z",
       "parsedDate": "2026-09-07T08:57:55.516Z",
       "isNew": true
+    },
+    {
+      "date": "17 hours ago",
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're #hiring a new Project Manager-Mergers And Acquisition in United States. Apply today or share this post with your network.",
+      "title": "#hiring | Vaisesika - LinkedIn",
+      "url": "https://www.linkedin.com/posts/vaisesika_hiring-activity-7502687859179446272-dnzA",
+      "categoryId": 6,
+      "categoryName": "Azure",
+      "author": "vaisesika",
+      "foundAt": "2026-09-08T04:03:50.530Z",
+      "parsedDate": "2026-09-07T11:03:50.530Z",
+      "isNew": true
+    },
+    {
+      "date": "4 hours ago",
+      "position": 3,
+      "site_name": "www.linkedin.com",
+      "snippet": "... United States in which is the largest World Cup in its history with 48 teams ... As a full-stack developer looking to connect with potential clients, I ...",
+      "title": "Fausto Perez's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/faustoperez86151_cant-begin-to-explain-how-great-the-last-activity-7502874758577917952-xmi9",
+      "categoryId": 10,
+      "categoryName": "Full-Stack Engineer",
+      "author": "faustoperez86151",
+      "foundAt": "2026-09-08T04:04:45.009Z",
+      "parsedDate": "2026-09-08T00:04:45.009Z",
+      "isNew": true
+    },
+    {
+      "date": "21 hours ago",
+      "position": 6,
+      "site_name": "www.linkedin.com",
+      "snippet": "Welcome to united states sir. Like · Reply. 1 Reaction. Shubhang Sinha. GSoC '26 ... Trainee @Amazon | Software Engineer Intern @ Accenture | Robotics Intern ...",
+      "title": "Krish Gupta's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/krish-gupta-51637b1b8_the-c-community-ive-looked-up-to-for-years-activity-7502621763030388736-yinN",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "krish-gupta-51637b1b8",
+      "foundAt": "2026-09-08T04:05:30.603Z",
+      "parsedDate": "2026-09-07T07:05:30.603Z",
+      "isNew": true
+    },
+    {
+      "date": "7 hours ago",
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... San Francisco, New York, LATAM and remote. Around 65% of US positions have a ... Harshithaa Prabu Venkatesh. Software Engineer @ Bosch Global Software ...",
+      "title": "I'm hiring for more than 150 open positions | Alex Watson - LinkedIn",
+      "url": "https://www.linkedin.com/posts/alex-watson-recruitment_im-hiring-for-more-than-150-open-positions-activity-7502830126103977984-7lGN",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "alex-watson-recruitment",
+      "foundAt": "2026-09-08T04:05:30.603Z",
+      "parsedDate": "2026-09-07T21:05:30.603Z",
+      "isNew": true
+    },
+    {
+      "date": "9 hours ago",
+      "position": 3,
+      "site_name": "www.linkedin.com",
+      "snippet": "Second, we are in San Francisco. I'm super happy we get to do it. I think ... See you next week. Igor Komar. Information Security Intern @ Rockwool / SWE @ PUT ...",
+      "title": "What happened at boski this week episode 4 (SF edition) - LinkedIn",
+      "url": "https://www.linkedin.com/posts/wojtekkulikowski_what-happened-at-boski-this-week-episode-activity-7502798784607854593-0DcO",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "wojtekkulikowski",
+      "foundAt": "2026-09-08T04:05:30.603Z",
+      "parsedDate": "2026-09-07T19:05:30.603Z",
+      "isNew": true
     }
   ],
-  "lastRun": "2026-09-07T21:59:26.643Z",
-  "runs": 28
+  "lastRun": "2026-09-08T04:06:46.832Z",
+  "runs": 29
 }
