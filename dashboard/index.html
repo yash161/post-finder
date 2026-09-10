@@ -632,6 +632,99 @@
       color: var(--accent-coral);
       background: rgba(255, 107, 107, 0.08);
     }
+
+    /* ── Name input ── */
+    .name-input {
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      width: 130px;
+      outline: none;
+      transition: all var(--transition);
+    }
+
+    .name-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .name-input:focus {
+      border-color: var(--accent-purple);
+      box-shadow: var(--shadow-glow-purple);
+    }
+
+    /* ── Active users panel ── */
+    .active-users-panel {
+      max-width: 1400px;
+      margin: 16px auto 0;
+      padding: 0 24px;
+    }
+
+    .active-users-card {
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .active-users-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .active-users-header .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .active-users-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .active-user-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 4px 0;
+    }
+
+    .active-user-row .au-name {
+      font-weight: 600;
+      color: var(--text-primary);
+      min-width: 100px;
+    }
+
+    .active-user-row .au-ip {
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      color: var(--accent-cyan);
+    }
+
+    .active-user-row .au-seen {
+      margin-left: auto;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .active-users-empty {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
@@ -658,6 +751,7 @@
         <button class="filter-btn active" data-filter="all" id="filterAll">All</button>
         <button class="filter-btn" data-filter="new" id="filterNew">🆕 New Only</button>
         <input type="text" class="search-input" id="searchInput" placeholder="Search posts…" />
+        <input type="text" class="name-input" id="nameInput" placeholder="Your name" maxlength="40" />
         <button class="run-now-btn" id="runNowBtn">▶ Run Now</button>
       </div>
     </div>
@@ -683,6 +777,18 @@
       <div class="stat-value" id="statRuns">—</div>
       <div class="stat-label">Total Runs</div>
     </div>
+    <div class="stat-card stat-green">
+      <div class="stat-value" id="statActive">—</div>
+      <div class="stat-label">Active Now</div>
+    </div>
+  </div>
+
+  <!-- Active users -->
+  <div class="active-users-panel" id="activeUsersPanel" hidden>
+    <div class="active-users-card">
+      <div class="active-users-header"><span class="dot"></span> Active Users</div>
+      <div class="active-users-list" id="activeUsersList"></div>
+    </div>
   </div>
 
   <!-- Category filter pills -->
@@ -704,6 +810,60 @@
     let activeCategoryId = null;
     let searchQuery = '';
     let activeTimeRange = 24; // hours, default 24h
+
+    // ── Presence (active users) ──
+    function getSessionId() {
+      let id = localStorage.getItem('pf_session_id');
+      if (!id) {
+        id = (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`);
+        localStorage.setItem('pf_session_id', id);
+      }
+      return id;
+    }
+    const sessionId = getSessionId();
+
+    async function sendHeartbeat() {
+      try {
+        await fetch('/api/active-users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId, name: document.getElementById('nameInput').value }),
+        });
+      } catch {
+        // Presence is best-effort — ignore failures.
+      }
+    }
+
+    async function fetchActiveUsers() {
+      try {
+        const resp = await fetch('/api/active-users');
+        const data = await resp.json();
+        renderActiveUsers(data.users || []);
+      } catch {
+        // Presence is best-effort — leave the last known state on screen.
+      }
+    }
+
+    function renderActiveUsers(users) {
+      document.getElementById('statActive').textContent = users.length;
+
+      const panel = document.getElementById('activeUsersPanel');
+      const list = document.getElementById('activeUsersList');
+
+      if (users.length === 0) {
+        panel.hidden = true;
+        return;
+      }
+
+      panel.hidden = false;
+      list.innerHTML = users.map((u) => `
+        <div class="active-user-row">
+          <span class="au-name">${escHtml(u.name)}</span>
+          <span class="au-ip">${escHtml(u.ip)}</span>
+          <span class="au-seen">${timeAgo(new Date(u.lastSeen))}</span>
+        </div>
+      `).join('');
+    }
 
     // ── Date parsing (client-side) ──
     function parseRelativeDate(dateStr) {
@@ -947,6 +1107,13 @@
       render();
     });
 
+    const nameInputEl = document.getElementById('nameInput');
+    nameInputEl.value = localStorage.getItem('pf_username') || '';
+    nameInputEl.addEventListener('change', (e) => {
+      localStorage.setItem('pf_username', e.target.value.trim());
+      sendHeartbeat();
+    });
+
     // ── Run Now ──
     function showRunStatus(message, kind) {
       const box = document.getElementById('runStatus');
@@ -1009,9 +1176,15 @@
 
     // ── Init ──
     fetchResults();
+    sendHeartbeat();
+    fetchActiveUsers();
 
     // Auto-refresh every 30 seconds
     setInterval(fetchResults, 30000);
+
+    // Presence: say "I'm still here" and refresh the active-users list every 15 seconds
+    setInterval(sendHeartbeat, 15000);
+    setInterval(fetchActiveUsers, 15000);
   </script>
 </body>
 </html>

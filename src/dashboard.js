@@ -12,6 +12,7 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { getResultsFilePath, loadPreviousResults, saveResults } from './results.js';
 import { runSearch, markNewResults } from './runSearch.js';
+import { registerHeartbeat, getActiveUsers, getClientIp } from './activeUsers.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DASHBOARD_HTML = join(__dirname, '..', 'dashboard', 'index.html');
@@ -38,6 +39,20 @@ export function startDashboard() {
     } catch {
       res.status(500).json({ error: 'Failed to read results' });
     }
+  });
+
+  // Presence — the dashboard pings this to say "I'm still here", and polls
+  // it to show how many people are currently viewing the page (plus their
+  // name/IP, best-effort based on the heartbeat's sender).
+  app.post('/api/active-users', (req, res) => {
+    const { sessionId, name } = req.body || {};
+    registerHeartbeat(sessionId, name, getClientIp(req));
+    res.json({ ok: true });
+  });
+
+  app.get('/api/active-users', (_req, res) => {
+    const users = getActiveUsers();
+    res.json({ count: users.length, users });
   });
 
   // "Run Now" — runs a fresh search across all categories and saves to data/results.json
