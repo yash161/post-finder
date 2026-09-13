@@ -9877,8 +9877,36 @@
       "foundAt": "2026-09-13T18:47:46.273Z",
       "parsedDate": "2026-09-13T03:47:46.273Z",
       "isNew": true
+    },
+    {
+      "date": "8 hours ago",
+      "position": 8,
+      "site_name": "www.linkedin.com",
+      "snippet": "... United States, the Middle East, and beyond. Where: American University ... Rashid Ghulam Sarwar. Software Engineer | AI & ML Solutions | Python, Java ...",
+      "title": "Dr. Jassim Al Awadhi (PhD, EMBA)'s Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/drjassimalawadhi_i-am-delighted-to-be-speaking-as-a-keynote-activity-7504889790090244096-wVK4",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "drjassimalawadhi",
+      "foundAt": "2026-09-13T21:17:45.181Z",
+      "parsedDate": "2026-09-13T13:17:45.181Z",
+      "isNew": true
+    },
+    {
+      "date": "11 hours ago",
+      "position": 7,
+      "site_name": "www.linkedin.com",
+      "snippet": "Software Engineer II At Microsoft ・ $116,900 - $203,600 at Microsoft. United States, Washington, Redmond $203,600 per year ・ every new opening at 17 top tech ...",
+      "title": "#microsoftcareers #hiring #techjobs #jobsearch | Akhil Reddy Danda",
+      "url": "https://www.linkedin.com/posts/akhil-reddy-danda-1a74b214b_microsoftcareers-hiring-techjobs-activity-7504850116399304704-0_13",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "akhil-reddy-danda-1a74b214b",
+      "foundAt": "2026-09-13T21:17:45.182Z",
+      "parsedDate": "2026-09-13T10:17:45.182Z",
+      "isNew": true
     }
   ],
-  "lastRun": "2026-09-13T18:48:05.316Z",
-  "runs": 45
+  "lastRun": "2026-09-13T21:19:25.098Z",
+  "runs": 46
 }
