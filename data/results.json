@@ -14953,8 +14953,78 @@
       "foundAt": "2026-09-20T18:45:27.858Z",
       "parsedDate": null,
       "isNew": true
+    },
+    {
+      "date": "6 hours ago",
+      "position": 4,
+      "site_name": "www.linkedin.com",
+      "snippet": "Cisco AI Infrastructure Strategy & Planning. AI infrastructure that finally represents the 80 percent most AI ignores. San Francisco, November 7, 2023. A ...",
+      "title": "Meeting with Dr.Joy Buolamwini | Christelle Mombo-Zigah - LinkedIn",
+      "url": "https://www.linkedin.com/posts/christellemombozigah_meeting-with-drjoy-buolamwini-activity-7507463704473444352-b-KF",
+      "categoryId": 9,
+      "categoryName": "AI Infrastructure / Agentic AI / MLOps",
+      "author": "christellemombozigah",
+      "foundAt": "2026-09-20T21:12:26.604Z",
+      "parsedDate": "2026-09-20T15:12:26.604Z",
+      "isNew": true
+    },
+    {
+      "date": "3 hours ago",
+      "position": 2,
+      "site_name": "www.linkedin.com",
+      "snippet": "WE'RE HIRING: Senior Software Engineer – LLM Evaluation (US/Canada/WEU based) ... United States, Canada, or Western Europe | Fully remote ...",
+      "title": "Tamer Omar, MBA, PMP's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/taomar_softwareengineering-llmevaluation-aijobs-activity-7507495045722439681-KfnT",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "taomar",
+      "foundAt": "2026-09-20T21:13:44.800Z",
+      "parsedDate": "2026-09-20T18:13:44.800Z",
+      "isNew": true
+    },
+    {
+      "date": "12 hours ago",
+      "position": 8,
+      "site_name": "www.linkedin.com",
+      "snippet": "... Software Engineer II, Microsoft Pankaj Khattar — Principal Engineering ... United States. A special thank you to Sania Ashraf, who coordinated with us ...",
+      "title": "Microsoft User Group: Uttar Pradesh Power BI Club's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/uppowerbiclub_microsoftai-agenticai-generativeai-activity-7507364614276354048-LEln",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "uppowerbiclub",
+      "foundAt": "2026-09-20T21:13:44.800Z",
+      "parsedDate": "2026-09-20T09:13:44.800Z",
+      "isNew": true
+    },
+    {
+      "date": "20 hours ago",
+      "position": 9,
+      "site_name": "www.linkedin.com",
+      "snippet": "Software Developer internetapplications.ca. 4h. Report this comment; Close menu ... United States is on the side of the ruzzia! United States has already ...",
+      "title": "Laura Kittel, PhD's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/laura-kittel-rights4all_so-this-is-bonkers-europeans-are-having-activity-7507238750188490752-gB11",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "laura-kittel-rights4all",
+      "foundAt": "2026-09-20T21:13:44.800Z",
+      "parsedDate": "2026-09-20T01:13:44.800Z",
+      "isNew": true
+    },
+    {
+      "date": "14 hours ago",
+      "position": 2,
+      "site_name": "www.linkedin.com",
+      "snippet": "14 hours ago · Founder & Host of “The Ravit Show” (Mumbai/San Francisco) Salesforce and Google Cloud Unify Infrastructure and Agents for One Connected AI Stack.",
+      "title": "Ravit Jain - Dreamforce - LinkedIn",
+      "url": "https://www.linkedin.com/posts/ravitjain_dreamforce-activity-7507333682588729344-W5Re",
+      "categoryId": 18,
+      "categoryName": "GCP (Google Cloud)",
+      "author": "ravitjain",
+      "foundAt": "2026-09-20T21:15:01.089Z",
+      "parsedDate": "2026-09-20T07:15:01.089Z",
+      "isNew": true
     }
   ],
-  "lastRun": "2026-09-20T18:45:40.191Z",
-  "runs": 66
+  "lastRun": "2026-09-20T21:15:38.337Z",
+  "runs": 67
 }
