@@ -15482,8 +15482,78 @@
       "foundAt": "2026-09-21T20:27:57.116Z",
       "parsedDate": "2026-09-21T11:27:57.116Z",
       "isNew": true
+    },
+    {
+      "date": "7 hours ago",
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... San Francisco (Hybrid / Onsite). Interested or know someone passionate ... Abdulrahman Yasser. Senior DevOps Engineer | Cloud & Platform ...",
+      "title": "Aidan Dinsbeer - Senior Software Engineer (Full-Stack) - LinkedIn",
+      "url": "https://www.linkedin.com/posts/aidan-dinsbeer_senior-software-engineer-full-stack-activity-7507817761138548736-Pc4s",
+      "categoryId": 1,
+      "categoryName": "Cloud Automation / DevOps / Platform",
+      "author": "aidan-dinsbeer",
+      "foundAt": "2026-09-21T22:26:24.082Z",
+      "parsedDate": "2026-09-21T15:26:24.082Z",
+      "isNew": true
+    },
+    {
+      "date": "19 hours ago",
+      "position": 4,
+      "site_name": "www.linkedin.com",
+      "snippet": "19 hours ago · ... United States. The arrival of Concorde at DFW, kicked off four days of ... Founder | Software Architect | AI Engineer. 2h. Report this comment; Close menu.",
+      "title": "BRANIFF HISTORY TODAY | Ben Cass | 10 comments - LinkedIn",
+      "url": "https://www.linkedin.com/posts/ben-cass-87053862_braniff-history-today-on-this-day-thursday-activity-7507645664751677440-JSQc",
+      "categoryId": 11,
+      "categoryName": "AI Engineer / MLOps / Perception",
+      "author": "ben-cass-87053862",
+      "foundAt": "2026-09-21T22:28:58.631Z",
+      "parsedDate": "2026-09-21T03:28:58.631Z",
+      "isNew": true
+    },
+    {
+      "date": "10 hours ago",
+      "position": 4,
+      "site_name": "www.linkedin.com",
+      "snippet": "Position open for Full-Stack Software Engineer - Remote Salary: $50 – $100 per hour Location: Remote – United States Job Description: • Design, develop, ...",
+      "title": "Misbah Azhar's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/misbah-azhar-1b3aa01a5_career-jobseekers-opportunity-activity-7507774827009847296-wjct",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "misbah-azhar-1b3aa01a5",
+      "foundAt": "2026-09-21T22:29:30.503Z",
+      "parsedDate": "2026-09-21T12:29:30.503Z",
+      "isNew": true
+    },
+    {
+      "date": "15 hours ago",
+      "position": 10,
+      "site_name": "www.linkedin.com",
+      "snippet": "Starbucks is setting up its first corporate technology hub outside the United States ... Staff Software Engineer at GoTo | Building AI Systems | JavaScript ...",
+      "title": "#starbucks #tamilnadu #gcc #chennai #techhub | AIM | 11 comments",
+      "url": "https://www.linkedin.com/posts/analytics-india-magazine_starbucks-tamilnadu-gcc-activity-7507701512656240640-f6Qc",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "analytics-india-magazine",
+      "foundAt": "2026-09-21T22:29:30.503Z",
+      "parsedDate": "2026-09-21T07:29:30.503Z",
+      "isNew": true
+    },
+    {
+      "date": "6 hours ago",
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're hiring for a Senior Software Engineer (US, remote) to lead the design ... Verint, United States · 23 2 Comments · Like Comment. Share. Copy; LinkedIn",
+      "title": "software #engineer #softwareengineer #us #remote #hiring #jobs",
+      "url": "https://www.linkedin.com/posts/helenvergeldedios_software-engineer-softwareengineer-activity-7507845869841461248-ALLX",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "helenvergeldedios",
+      "foundAt": "2026-09-21T22:29:30.503Z",
+      "parsedDate": "2026-09-21T16:29:30.503Z",
+      "isNew": true
     }
   ],
-  "lastRun": "2026-09-21T20:28:04.618Z",
-  "runs": 69
+  "lastRun": "2026-09-21T22:31:12.630Z",
+  "runs": 70
 }
