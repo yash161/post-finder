@@ -19430,8 +19430,99 @@
       "foundAt": "2026-09-26T19:15:51.042Z",
       "parsedDate": null,
       "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... United States. They were so far ahead of their peers in physics and ... Full-Stack Developer | MERN Stack • React Native • Next.js | Turning Ideas into ...",
+      "title": "Zoli Somogyi's Post",
+      "url": "https://www.linkedin.com/posts/zsomogyi_innovation-techhistory-leadership-activity-7509498784620412929-H2Nq",
+      "categoryId": 10,
+      "categoryName": "Full-Stack Engineer",
+      "author": "zsomogyi",
+      "foundAt": "2026-09-26T21:51:41.012Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 2,
+      "site_name": "www.linkedin.com",
+      "snippet": "... San Francisco, USA Compensation: $250000–$350000/year + Equity ... Next.js, and AWS. Partner across security, compliance, and engineering leadership ...",
+      "title": "Product Notion's Post",
+      "url": "https://www.linkedin.com/posts/product-notion_product-notion-activity-7509643042270715904-Y3pv",
+      "categoryId": 10,
+      "categoryName": "Full-Stack Engineer",
+      "author": "product-notion",
+      "foundAt": "2026-09-26T21:51:41.012Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 3,
+      "site_name": "www.linkedin.com",
+      "snippet": "WE&#39;RE HIRING: Finance Expert (US based) 🇺🇸 United States | Fully remote • Compensation: Approximately $100+/hour, depending on experience. Evaluate LLMs to ...",
+      "title": "Tamer Omar, MBA, PMP's Post",
+      "url": "https://www.linkedin.com/posts/taomar_hiring-financejobs-financialanalysis-activity-7509658185272791040-ZjzJ",
+      "categoryId": 11,
+      "categoryName": "AI Engineer / MLOps / Perception",
+      "author": "taomar",
+      "foundAt": "2026-09-26T21:51:59.321Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 3,
+      "site_name": "www.linkedin.com",
+      "snippet": "Want to earn up to $900,000 at Netflix? 3 new roles just opened Fresh openings Software Engineer (L6) - Compute Runtime Remote, United States ...",
+      "title": "Akhil Reddy Danda's Post",
+      "url": "https://www.linkedin.com/posts/akhil-reddy-danda-1a74b214b_netflixcareers-hiring-techjobs-activity-7509561162389176320-cqtq",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "akhil-reddy-danda-1a74b214b",
+      "foundAt": "2026-09-26T21:52:37.813Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 8,
+      "site_name": "www.linkedin.com",
+      "snippet": "Microsoft just posted 2 new roles — pay up to $274800 Fresh openings Principal Design Engineer - IP Office United States ... Software Engineer ...",
+      "title": "Akhil Reddy Danda's Post",
+      "url": "https://www.linkedin.com/posts/akhil-reddy-danda-1a74b214b_microsoftcareers-hiring-techjobs-activity-7509417714633973769-I1eb",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "akhil-reddy-danda-1a74b214b",
+      "foundAt": "2026-09-26T21:52:37.813Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 10,
+      "site_name": "www.linkedin.com",
+      "snippet": "Want to earn up to $296400 at Microsoft? 1 new role just opened Fresh openings Director of Integrated Creative United States ... Software Engineer ...",
+      "title": "Akhil Reddy Danda's Post",
+      "url": "https://www.linkedin.com/posts/akhil-reddy-danda-1a74b214b_microsoftcareers-hiring-techjobs-activity-7509430488315633664-HqR4",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "akhil-reddy-danda-1a74b214b",
+      "foundAt": "2026-09-26T21:52:37.813Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 7,
+      "site_name": "www.linkedin.com",
+      "snippet": "A fast-growing software company is searching for a Quality Assurance Engineer. Location: Remote – United States Duration: Full-time, Permanent",
+      "title": "Next Career News' Post",
+      "url": "https://www.linkedin.com/posts/next-career-news_hiring-wearehiring-nextcareernews-activity-7509660665801011201-VOKk",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "next-career-news",
+      "foundAt": "2026-09-26T21:52:37.813Z",
+      "parsedDate": null,
+      "isNew": true
     }
   ],
-  "lastRun": "2026-09-26T19:16:10.675Z",
-  "runs": 84
+  "lastRun": "2026-09-26T21:54:44.002Z",
+  "runs": 85
 }
