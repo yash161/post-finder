@@ -19912,8 +19912,60 @@
       "foundAt": "2026-09-27T19:46:44.355Z",
       "parsedDate": null,
       "isNew": true
+    },
+    {
+      "position": 2,
+      "site_name": "www.linkedin.com",
+      "snippet": "🚨 Hiring: NoSQL Couchbase DevOps Engineer 📍 Location: San Francisco Bay Area, CA (Local Candidates Preferred) 💼 Employment Type: Contract | Long-Term Opportunity We are looking for a ...",
+      "title": "#hiring #devops #sre #couchbase #nosql #aws #terraform # ...",
+      "url": "https://www.linkedin.com/posts/lakshmi-kanth-lucky-7674921aa_hiring-devops-sre-activity-7509352245029871616-hVcc",
+      "categoryId": 2,
+      "categoryName": "SRE / Infrastructure",
+      "author": "lakshmi-kanth-lucky-7674921aa",
+      "foundAt": "2026-09-27T21:51:11.823Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 3,
+      "site_name": "www.linkedin.com",
+      "snippet": "🚀 RapidFort is hiring an Infrastructure Engineer in the San Francisco Bay Area — candidates must be based in the Bay Area, preferably near SFO. We’re looking for strong Linux skills, Bash ...",
+      "title": "RapidFort is hiring an Infrastructure Engineer in the San ...",
+      "url": "https://www.linkedin.com/posts/seanmostafavi_rapidfort-is-hiring-an-infrastructure-activity-7505420458490667009-6vxi",
+      "categoryId": 2,
+      "categoryName": "SRE / Infrastructure",
+      "author": "seanmostafavi",
+      "foundAt": "2026-09-27T21:51:11.823Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 7,
+      "site_name": "www.linkedin.com",
+      "snippet": "the United States should worry when China has new monopolies over materials ... Software Architect / Senior Software Developer. 52m. Report this comment",
+      "title": "The US and China are deeply intertwined. To manage their ...",
+      "url": "https://www.linkedin.com/posts/fareed-zakaria-7098ba24b_the-us-and-china-are-deeply-intertwined-activity-7510035584438960128-V3NQ",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "fareed-zakaria-7098ba24b",
+      "foundAt": "2026-09-27T21:54:23.492Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... San Francisco for six weeks at EWOR residency, alongside some seriously ... Mehedi Hasan. Sr. Platform Engineer @ kernel.ai | AWS | K8s | Tf | Linux | Postgres | ...",
+      "title": "Anowar Hossain's Post",
+      "url": "https://www.linkedin.com/posts/anowar-hossain-uk_some-news-i-have-been-holding-back-i-am-activity-7509862808302288896-3yDL",
+      "categoryId": 16,
+      "categoryName": "Linux / RHEL System Administration",
+      "author": "anowar-hossain-uk",
+      "foundAt": "2026-09-27T21:55:10.973Z",
+      "parsedDate": null,
+      "isNew": true
     }
   ],
-  "lastRun": "2026-09-27T19:48:47.026Z",
-  "runs": 87
+  "lastRun": "2026-09-27T21:56:11.127Z",
+  "runs": 88
 }
