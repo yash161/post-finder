@@ -19964,8 +19964,87 @@
       "foundAt": "2026-09-27T21:55:10.973Z",
       "parsedDate": null,
       "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... San Francisco Who should apply? → Pre-seed and seed-stage founders → Pre ... | Enterprise Technology | AI Infrastructure | Strategic Partnerships | Global ...",
+      "title": "Atif Shaikh's Post",
+      "url": "https://www.linkedin.com/posts/atifvp_16vc-is-offering-200k-to-early-stage-founders-activity-7509866634891825152-HMvT",
+      "categoryId": 9,
+      "categoryName": "AI Infrastructure / Agentic AI / MLOps",
+      "author": "atifvp",
+      "foundAt": "2026-09-28T04:53:45.955Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "date": "Apple is hiring",
+      "position": 4,
+      "site_name": "www.linkedin.com",
+      "snippet": "1 new role, grab yours before they're gone Fresh openings Role United States ... Software Engineer II At Microsoft | ex ...",
+      "title": "Akhil Reddy Danda's Post",
+      "url": "https://www.linkedin.com/posts/akhil-reddy-danda-1a74b214b_applecareers-hiring-techjobs-activity-7510157590421630976-CU3Z",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "akhil-reddy-danda-1a74b214b",
+      "foundAt": "2026-09-28T04:55:22.607Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 4,
+      "site_name": "www.linkedin.com",
+      "snippet": "I'm hiring a Staff Software Engineer to build PayJoy’s Customer Data Platform in San Francisco. This is a high-impact role where you’ll design the systems that create a single, real-time view ...",
+      "title": "PayJoy - Staff Software Engineer - Customer Data Platform ...",
+      "url": "https://www.linkedin.com/posts/raj-vasikarla-b796a330_payjoy-staff-software-engineer-customer-activity-7444233969925025793-qpci",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "raj-vasikarla-b796a330",
+      "foundAt": "2026-09-28T04:55:22.607Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 7,
+      "site_name": "www.linkedin.com",
+      "snippet": "🚨 #Hiring:Software_Engineer-Infrastructure 📍 #Location: San Francisco, CA (HYBRID) 💼#Job_Type: Full-Time #Job_Description: We are looking for a Software Engineer to join a platform team ...",
+      "title": "#job_description #key_responsibilities #requirements #hiring ...",
+      "url": "https://www.linkedin.com/posts/manisha-kumari-813113311_jobdescription-keyresponsibilities-requirements-activity-7508905927266217984-l1Sb",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "manisha-kumari-813113311",
+      "foundAt": "2026-09-28T04:55:22.607Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're #hiring a new DevSecOps Engineer in United States. Apply today or share this post with your network. DevSecOps Engineer. BrothersTech, United States.",
+      "title": "BrothersTech - hiring",
+      "url": "https://www.linkedin.com/posts/brotherstech_hiring-activity-7509934174926114816-phsO",
+      "categoryId": 19,
+      "categoryName": "Security Engineering / DevSecOps",
+      "author": "brotherstech",
+      "foundAt": "2026-09-28T04:57:05.971Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... San Francisco-headquartered startup is building AI coding agents ... embedded systems and semiconductors. Its platform is designed to build, debug and ...",
+      "title": "CXO TechBOT's Post",
+      "url": "https://www.linkedin.com/posts/cxo-tech-bot_cxotechbot-byteask-ai-activity-7509960487397195777-ULO4",
+      "categoryId": 20,
+      "categoryName": "IoT / Embedded Systems",
+      "author": "cxo-tech-bot",
+      "foundAt": "2026-09-28T04:57:16.930Z",
+      "parsedDate": null,
+      "isNew": true
     }
   ],
-  "lastRun": "2026-09-27T21:56:11.127Z",
-  "runs": 88
+  "lastRun": "2026-09-28T04:57:30.072Z",
+  "runs": 89
 }
