@@ -22334,8 +22334,99 @@
       "foundAt": "2026-10-01T21:01:58.750Z",
       "parsedDate": null,
       "isNew": true
+    },
+    {
+      "position": 4,
+      "site_name": "www.linkedin.com",
+      "snippet": "Staff Contracts & Acquisition Management Consultant, Software Defined Infrastructure Engineer Northrop Grumman, United States. Recruitment & HR Customer ... Missing:  hiring  | Show results with:",
+      "title": "Justin Frank Tidwell posted on LinkedIn",
+      "url": "https://www.linkedin.com/posts/justin-frank-tidwell-4a35042a_activity-7511240932629925888-JX2h",
+      "categoryId": 2,
+      "categoryName": "SRE / Infrastructure",
+      "author": "justin-frank-tidwell-4a35042a",
+      "foundAt": "2026-10-01T22:59:39.336Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... AI infrastructure, we'd love to hear from you! Please reach out to Veronica ... Senior Associate, Strategic Finance - Tech. Uber, San Francisco, CA · 31.",
+      "title": "Zack Scheinholz's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/zackscheinholz_im-hiring-on-my-team-as-compute-becomes-activity-7511465455849672704-EM7F",
+      "categoryId": 9,
+      "categoryName": "AI Infrastructure / Agentic AI / MLOps",
+      "author": "zackscheinholz",
+      "foundAt": "2026-10-01T23:01:14.534Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're #hiring a new AI Engineer in United States. Apply today or share this post with your network. AI Engineer. Golden Technology, United States.",
+      "title": "#hiring | Golden Technology - LinkedIn",
+      "url": "https://www.linkedin.com/posts/golden-technology-inc_hiring-activity-7511387231534866432-qMDt",
+      "categoryId": 11,
+      "categoryName": "AI Engineer / MLOps / Perception",
+      "author": "golden-technology-inc",
+      "foundAt": "2026-10-01T23:01:48.925Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 6,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're hiring! ... Principal Software Engineer, Identity in United States | GitHub, Inc.",
+      "title": "Anyell Cano - Software Engineer, Identity in United States",
+      "url": "https://www.linkedin.com/posts/anyell-cano_principal-software-engineer-identity-in-activity-7511205933356875776-BQye",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "anyell-cano",
+      "foundAt": "2026-10-01T23:02:18.856Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're #hiring a new Data engineering Manager (Databricks, Data architecture, ETL, Snowflake, AI) in San Francisco, California. Apply today or share this ...",
+      "title": "Diligente Technologies - hiring - LinkedIn",
+      "url": "https://www.linkedin.com/posts/diligente-technologies_hiring-activity-7511387100261580802-rfCe",
+      "categoryId": 14,
+      "categoryName": "Data Engineering / ETL",
+      "author": "diligente-technologies",
+      "foundAt": "2026-10-01T23:02:34.036Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 4,
+      "site_name": "www.linkedin.com",
+      "snippet": "Michael Sheridan's Post … be based in San Francisco. Google Cloud CMO on Google Salesforce. Recruitment & HR Customer Experience Missing:  hiring (  | Show results with:",
+      "title": "Michael Sheridan's Post - LinkedIn",
+      "url": "https://www.linkedin.com/posts/michael-sheridan-b035464_after-40-incredible-years-in-the-information-activity-7511510852387147776-IUoA",
+      "categoryId": 18,
+      "categoryName": "GCP (Google Cloud)",
+      "author": "michael-sheridan-b035464",
+      "foundAt": "2026-10-01T23:03:16.243Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "We're #hiring a new Senior Cloud Security Engineer in United States. Apply today or share this post with your network.",
+      "title": "Med-Metrix - hiring - LinkedIn",
+      "url": "https://www.linkedin.com/posts/med-metrix_hiring-activity-7511386459216699392-j3hR",
+      "categoryId": 19,
+      "categoryName": "Security Engineering / DevSecOps",
+      "author": "med-metrix",
+      "foundAt": "2026-10-01T23:03:27.760Z",
+      "parsedDate": null,
+      "isNew": true
     }
   ],
-  "lastRun": "2026-10-01T21:02:16.529Z",
-  "runs": 99
+  "lastRun": "2026-10-01T23:03:43.335Z",
+  "runs": 100
 }
