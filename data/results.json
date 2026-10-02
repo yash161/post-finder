@@ -22855,8 +22855,47 @@
       "foundAt": "2026-10-02T20:42:18.573Z",
       "parsedDate": null,
       "isNew": true
+    },
+    {
+      "position": 5,
+      "site_name": "www.linkedin.com",
+      "snippet": "... United States | Remote • Compensation: $80–$110 per hour. • Employment type ... Dear Tamer Omar, MBA, PMP I am Full stack software engineer and have experiene in ...",
+      "title": "Tamer Omar, MBA, PMP's Post",
+      "url": "https://www.linkedin.com/posts/taomar_productdesign-uiux-designengineering-activity-7511817334626369536-JM6_",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "taomar",
+      "foundAt": "2026-10-02T22:52:43.715Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "NOW HIRING: INDUSTRIAL ENGINEERS May 2025 – Dec 2025 Graduates | Entry–Mid Level United States (US-Based Candidates Only) Are you ready to optimize ...",
+      "title": "Shivamsinh Rathor's Post",
+      "url": "https://www.linkedin.com/posts/shivamsinh-rathor-8553a5198_now-hiring-industrial-engineers-activity-7511881291126951936-y_rd",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "shivamsinh-rathor-8553a5198",
+      "foundAt": "2026-10-02T22:52:43.715Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "I'm hiring Data Platform Engineers to join Mercor's Data Platform team in San Francisco ... Snowflake, Fivetran, Airflow, and Hex, building clear ...",
+      "title": "Patrick Old's Post",
+      "url": "https://www.linkedin.com/posts/pat-old_im-hiring-data-platform-engineers-to-join-activity-7511563707836108800-26vS",
+      "categoryId": 14,
+      "categoryName": "Data Engineering / ETL",
+      "author": "pat-old",
+      "foundAt": "2026-10-02T22:53:03.471Z",
+      "parsedDate": null,
+      "isNew": true
     }
   ],
-  "lastRun": "2026-10-02T20:42:18.587Z",
-  "runs": 102
+  "lastRun": "2026-10-02T22:54:44.428Z",
+  "runs": 103
 }
