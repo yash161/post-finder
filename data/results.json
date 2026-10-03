@@ -22894,8 +22894,86 @@
       "foundAt": "2026-10-02T22:53:03.471Z",
       "parsedDate": null,
       "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... lnkd.in/dYKrXUKq Reach out if this role sounds like you. Staff Machine Learning Engineer. Babylist, United States · 25 · Like Comment. Share. Copy; LinkedIn",
+      "title": "Arthur Wang's Post",
+      "url": "https://www.linkedin.com/posts/arthurnw_were-hiring-a-staff-mle-if-youre-interested-activity-7511802520709595137-rB6X",
+      "categoryId": 11,
+      "categoryName": "AI Engineer / MLOps / Perception",
+      "author": "arthurnw",
+      "foundAt": "2026-10-03T04:52:45.581Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 4,
+      "site_name": "www.linkedin.com",
+      "snippet": "Embedded Software Engineer (VxWorks). Colossus Technologies Group, United States · 2 · Like Comment. Share. Copy; LinkedIn; Facebook; X; Close menu.",
+      "title": "Lavinia Ionita's Post",
+      "url": "https://www.linkedin.com/posts/lavinia-ionita-10a425152_activity-7511863294287183872-IKDC",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "lavinia-ionita-10a425152",
+      "foundAt": "2026-10-03T04:53:33.014Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 3,
+      "site_name": "www.linkedin.com",
+      "snippet": "I joined Fragment a few weeks ago as a Founding Integration Architect, and we're hiring ... San Francisco: Engineering: → Software Engineer Go-to-market: → ...",
+      "title": "Kathleen C.'s Post",
+      "url": "https://www.linkedin.com/posts/kathleen-c-498962b1_hiring-procurement-ai-activity-7511866074741608449-eR4q",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "kathleen-c-498962b1",
+      "foundAt": "2026-10-03T04:53:33.014Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "Simultaneous by Eric Heisserer Summary: Soul Overlap Thriller TL;DR: Simultaneous by Eric Heisserer Quick Summary A software engineer in Los Angeles keeps",
+      "title": "Simultaneous by Eric Heisserer Summary - Meed Touzani",
+      "url": "https://www.linkedin.com/posts/medto_simultaneous-by-eric-heisserer-summary-soul-activity-7511884888149704704-Dy9W",
+      "categoryId": 13,
+      "categoryName": "General Software Engineering",
+      "author": "medto",
+      "foundAt": "2026-10-03T04:53:33.014Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "Security Engineer Hampton North, United States. Just applied for the Security Engineer role, Ruby, this one genuinely caught my attention.",
+      "title": "Posting for the CorpSec spot 👀 | ✨Ruby Murphy✨",
+      "url": "https://www.linkedin.com/posts/linkedwithruby_posting-for-the-corpsec-spot-activity-7511865340512006145-VO7A",
+      "categoryId": 19,
+      "categoryName": "Security Engineering / DevSecOps",
+      "author": "linkedwithruby",
+      "foundAt": "2026-10-03T04:55:13.985Z",
+      "parsedDate": null,
+      "isNew": true
+    },
+    {
+      "position": 1,
+      "site_name": "www.linkedin.com",
+      "snippet": "... embedded payments platform, and strategic end-to-end resources available ... United States' Best Bank by Euromoney (2026) ▪️USA TODAY Top Workplaces ...",
+      "title": "Executive Director, Innovation Banking | Gaurish Vadhavkar",
+      "url": "https://www.linkedin.com/posts/gaurish-vadhavkar-2657455b_executive-director-innovation-banking-activity-7511756121657901056-E0w3",
+      "categoryId": 20,
+      "categoryName": "IoT / Embedded Systems",
+      "author": "gaurish-vadhavkar-2657455b",
+      "foundAt": "2026-10-03T04:55:29.181Z",
+      "parsedDate": null,
+      "isNew": true
     }
   ],
-  "lastRun": "2026-10-02T22:54:44.428Z",
-  "runs": 103
+  "lastRun": "2026-10-03T04:55:42.906Z",
+  "runs": 104
 }
