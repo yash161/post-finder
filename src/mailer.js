@@ -19,9 +19,15 @@ import { filterByRecency } from './dateParser.js';
 
 // ── Config ───────────────────────────────────────────────────
 
-const GMAIL_USER = process.env.GMAIL_USER || 'testwowtruecaller123';
-const GMAIL_PASS = process.env.GMAIL_APP_PASSWORD || 'vpjbpiivyzziwgkd';
+const GMAIL_USER = process.env.GMAIL_USER;
+const GMAIL_PASS = process.env.GMAIL_APP_PASSWORD;
 const RECIPIENT = process.env.EMAIL_RECIPIENT || 'yashshah3698@gmail.com';
+
+if (!GMAIL_USER || !GMAIL_PASS) {
+  console.error('  ❌ GMAIL_USER and GMAIL_APP_PASSWORD must be set (environment or .env).');
+  console.error('  Never hardcode credentials in source — the repo is public.');
+  process.exit(1);
+}
 const DASHBOARD_URL = process.env.DASHBOARD_URL || 'https://post-finder-neon.vercel.app';
 
 const FORCE = process.argv.includes('--force');

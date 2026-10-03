@@ -10,6 +10,8 @@
  *   node src/index.js                        # Run all 14 categories (past 24h)
  *   node src/index.js --hours 48             # Past 48 hours
  *   node src/index.js --categories 1,2,9     # Run specific categories
+ *   node src/index.js --concurrency 1        # Sequential (default: 3 paced workers)
+ *   node src/index.js --limit 50 --pages 2    # More results per query (extra API calls)
  *   node src/index.js --dashboard            # Also start the web dashboard
  *   node src/index.js --json                 # Output raw JSON to stdout
  *   node src/index.js --dashboard-only       # Only start the dashboard (no new search)
@@ -28,6 +30,7 @@ import {
 import { searchBatch } from './tinyfish.js';
 import { deduplicateResults, markNewResults, extractAuthor, normalizeUrl } from './dedup.js';
 import { filterByRecency, parseRelativeDate } from './dateParser.js';
+import { extractCompany } from './company.js';
 import { loadPreviousResults, saveResults } from './results.js';
 import {
   printHeader,
@@ -47,6 +50,9 @@ program
   .version('1.0.0')
   .option('-c, --categories <ids>', 'Comma-separated category IDs to run (default: all)', '')
   .option('-h, --hours <hours>', 'Max post age in hours (default: 24)', '24')
+  .option('-j, --concurrency <n>', 'Parallel API workers, paced to stay in rate limit (default: 3)', '3')
+  .option('-l, --limit <n>', 'Results requested per API call (default: 30)', '30')
+  .option('--pages <n>', 'Result pages to fetch per query, 1 extra API call per page (default: 1)', '1')
   .option('--dashboard', 'Start the web dashboard after searching')
   .option('--dashboard-only', 'Start the web dashboard without running a new search')
   .option('--json', 'Output raw JSON to stdout instead of formatted text')
@@ -80,6 +86,9 @@ async function main() {
   }
 
   const maxHours = parseInt(opts.hours, 10) || 24;
+  const concurrency = Math.max(1, parseInt(opts.concurrency, 10) || 3);
+  const limit = Math.max(1, parseInt(opts.limit, 10) || 30);
+  const maxPages = Math.max(1, parseInt(opts.pages, 10) || 1);
 
   if (!opts.json) {
     console.log(`  Running ${selectedCategories.length} categories (past ${maxHours}h)…\n`);
@@ -107,6 +116,9 @@ async function main() {
 
     const batchResults = await searchBatch(queries, {
       recencyMinutes: maxHours * 60,
+      concurrency,
+      limit,
+      maxPages,
       onProgress: !opts.json
         ? (done, total) => {
             queryCount++;
@@ -152,6 +164,7 @@ async function main() {
           categoryId: category.id,
           categoryName: category.name,
           author: extractAuthor(result.url),
+          company: extractCompany(result.title, result.snippet),
           url: normalizeUrl(result.url),
           foundAt: new Date().toISOString(),
           parsedDate: parsed ? parsed.toISOString() : null,

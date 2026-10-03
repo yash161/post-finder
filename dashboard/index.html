@@ -964,9 +964,16 @@
       showRunStatus(`Running a fresh search across all 21 categories for the past ${hours}h. This can take up to ~4 minutes — please keep this tab open.`);
 
       try {
+        // The /api/run endpoint is protected by RUN_SECRET (set in Vercel env).
+        // Remember it for this session so the user isn't asked every time.
+        if (!window.__runSecret) {
+          const secret = prompt('Enter the dashboard run secret (RUN_SECRET):');
+          if (!secret) throw new Error('Run cancelled — a run secret is required.');
+          window.__runSecret = secret;
+        }
         const resp = await fetch('/api/run', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'x-run-secret': window.__runSecret },
           body: JSON.stringify({ hours }),
         });
         const payload = await resp.json();
@@ -981,6 +988,8 @@
 
         showRunStatus(`✅ Run complete — ${payload.newCount} new post${payload.newCount === 1 ? '' : 's'} found (${payload.totalCount} tracked total).`, 'success');
       } catch (err) {
+        // Wrong secret → forget it so the next click re-prompts.
+        if (/401|Unauthorized|invalid run secret/i.test(err.message)) window.__runSecret = null;
         showRunStatus(`❌ Run failed: ${err.message}`, 'error');
       } finally {
         btn.disabled = false;

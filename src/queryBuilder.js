@@ -8,6 +8,8 @@
  *   site:linkedin.com/posts <raw query string>
  */
 
+import { hiringPhrases } from './config.js';
+
 /**
  * Build a single search string from a raw query.
  * @param {string} query - The raw boolean query string from config
@@ -55,12 +57,16 @@ export function extractLocationPhrase(query) {
  * Check whether a result's title/snippet actually contains the location
  * phrase its query targeted (case-insensitive substring match).
  *
+ * The "united states" check is skipped: every search already carries
+ * location=US server-side, and requiring the literal phrase in a short
+ * snippet was silently dropping legit US posts.
+ *
  * @param {Object} result - A raw Tinyfish result with title/snippet
  * @param {string|null} locationPhrase - From extractLocationPhrase()
  * @returns {boolean} True if there's no location phrase to check, or it's present
  */
 export function matchesLocation(result, locationPhrase) {
-  if (!locationPhrase) return true;
+  if (!locationPhrase || locationPhrase === 'united states') return true;
   const haystack = `${result.title || ''} ${result.snippet || ''}`.toLowerCase();
   return haystack.includes(locationPhrase);
 }
@@ -92,17 +98,36 @@ export function extractRequiredGroups(query) {
 }
 
 /**
+ * A group made only of hiring phrases ("we're hiring" OR "we are hiring")
+ * is not a topic signal — Tinyfish already matched the query on some
+ * hiring wording, and snippets often truncate the exact phrase. Enforcing
+ * it was dropping legit posts, so these groups are skipped.
+ *
+ * @param {string[]} terms - Lowercase, unquoted terms from one OR-group
+ * @returns {boolean}
+ */
+export function isHiringPhraseGroup(terms) {
+  const phrases = new Set(hiringPhrases.map((p) => p.toLowerCase()));
+  return terms.length > 0 && terms.every((t) => phrases.has(t));
+}
+
+/**
  * Check whether a result's title/snippet contains at least one term from
  * every required OR-group. Tinyfish can return results that share only
  * the hiring phrase and location with a query while ignoring the actual
  * skill/role terms entirely — this catches those.
  *
+ * Hiring-phrase-only groups are skipped (see isHiringPhraseGroup): only
+ * the skill/role groups are enforced.
+ *
  * @param {Object} result - A raw Tinyfish result with title/snippet
  * @param {string[][]} groups - From extractRequiredGroups()
- * @returns {boolean} True if there are no groups to check, or every group has a match
+ * @returns {boolean} True if there are no groups to check, or every enforced group has a match
  */
 export function matchesRequiredGroups(result, groups) {
   if (!groups || groups.length === 0) return true;
+  const enforced = groups.filter((terms) => !isHiringPhraseGroup(terms));
+  if (enforced.length === 0) return true;
   const haystack = `${result.title || ''} ${result.snippet || ''}`.toLowerCase();
-  return groups.every((terms) => terms.some((t) => haystack.includes(t)));
+  return enforced.every((terms) => terms.some((t) => haystack.includes(t)));
 }

@@ -14,6 +14,7 @@ import {
 import { searchBatch } from './tinyfish.js';
 import { deduplicateResults, markNewResults, extractAuthor, normalizeUrl } from './dedup.js';
 import { filterByRecency, parseRelativeDate } from './dateParser.js';
+import { extractCompany } from './company.js';
 
 /**
  * Run searches for the given categories, filter by recency, and dedupe.
@@ -23,14 +24,14 @@ import { filterByRecency, parseRelativeDate } from './dateParser.js';
  * @param {number} [options.maxHours] - Recency window in hours (default: 24)
  * @returns {Promise<Object[]>} Deduplicated results
  */
-export async function runSearch({ categories = allCategories, maxHours = 24 } = {}) {
+export async function runSearch({ categories = allCategories, maxHours = 24, concurrency = 3, limit = 30, maxPages = 1 } = {}) {
   const allResults = [];
   const globalSeen = new Set();
   const recencyMinutes = maxHours * 60;
 
   for (const category of categories) {
     const queries = buildCategoryQueries(category);
-    const batchResults = await searchBatch(queries, { recencyMinutes });
+    const batchResults = await searchBatch(queries, { recencyMinutes, concurrency, limit, maxPages });
 
     const flatResults = [];
     for (const batch of batchResults) {
@@ -49,6 +50,7 @@ export async function runSearch({ categories = allCategories, maxHours = 24 } = 
           categoryId: category.id,
           categoryName: category.name,
           author: extractAuthor(result.url),
+          company: extractCompany(result.title, result.snippet),
           url: normalizeUrl(result.url),
           foundAt: new Date().toISOString(),
           parsedDate: parsed ? parsed.toISOString() : null,
